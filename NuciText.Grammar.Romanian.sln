@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8E3A52F7-D0F2-432B-8F12-58A81E247E09}") = "NuciText.Grammar.Romanian", "NuciText.Grammar.Romanian\NuciText.Grammar.Romanian.csproj", "{BC457882-C58B-47AD-A4D6-C16705048068}"
+EndProject
+Project("{8C0A2DF4-9458-4542-A851-15F9883FB7D1}") = "NuciText.Grammar.Romanian.UnitTests", "NuciText.Grammar.Romanian.UnitTests\NuciText.Grammar.Romanian.UnitTests.csproj", "{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC457882-C58B-47AD-A4D6-C16705048068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC457882-C58B-47AD-A4D6-C16705048068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC457882-C58B-47AD-A4D6-C16705048068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC457882-C58B-47AD-A4D6-C16705048068}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Debug|x64.Build.0 = Debug|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Debug|x86.Build.0 = Debug|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Release|x64.ActiveCfg = Release|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Release|x64.Build.0 = Release|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Release|x86.ActiveCfg = Release|Any CPU
+		{9702A6A6-616B-4E0F-9DBC-EE2A3CA2641F}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

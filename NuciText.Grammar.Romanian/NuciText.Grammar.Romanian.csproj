@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>NuciText.Grammar.Romanian</RootNamespace>
+    <AssemblyName>NuciText.Grammar.Romanian</AssemblyName>
+    <Version>1.0.0</Version>
+    <Description>Romanian grammar correction package for NuciText.Grammar.</Description>
+    <Authors>Horațiu Mlendea</Authors>
+    <Copyright>Copyright 2026 © Horațiu Mlendea</Copyright>
+    <RepositoryUrl>https://github.com/hmlendea/nucitext.grammar.romanian</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageTags>text;grammar;correction;romanian;nlp;nucitext</PackageTags>
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\nucitext.grammar\NuciText.Grammar\NuciText.Grammar.csproj" />
+  </ItemGroup>
+
+</Project>
