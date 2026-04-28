@@ -13,6 +13,7 @@ public sealed class RomanianGrammarRuleSet : GrammarRuleSet
     [
         new TrimWhitespaceRule(),
         new TzDiacriticBeforeVowelsRule(),
+        new UlInsteadOfURule()
     ];
 
     /// <inheritdoc/>

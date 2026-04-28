@@ -30,6 +30,7 @@ public class RomanianGrammarCorrectorTests
     [Test]
     [TestCase("ana are mere", "ana are mere")]
     [TestCase("tzara asta este mare", "țara asta este mare")]
+    [TestCase("tzeava sparge geamu", "țeava sparge geamul")]
     public void GivenText_WhenCorrecting_ThenTheExpectedTextIsReturned(
         string inputText,
         string expectedText)
