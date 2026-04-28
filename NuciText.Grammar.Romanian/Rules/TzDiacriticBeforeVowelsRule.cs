@@ -9,7 +9,7 @@ internal sealed class TzDiacriticBeforeVowelsRule : GrammarRule
     public override string Id => "tz-diacritic-before-vowels";
 
     /// <inheritdoc/>
-    public override string Description => "Trims leading and trailing whitespace.";
+    public override string Description => "Replaces 'tz' before vowels with the Romanian 'ț' diacritic.";
 
     /// <inheritdoc/>
     protected override string DoApply(string text)

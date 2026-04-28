@@ -12,8 +12,18 @@ public sealed class RomanianGrammarRuleSet : GrammarRuleSet
     static readonly IGrammarRule[] rules =
     [
         new TrimWhitespaceRule(),
+        new RepeatedCharacterCompressionRule(),
         new TzDiacriticBeforeVowelsRule(),
-        new UlInsteadOfURule()
+        new RomanianSlangRule(),
+        new RomanianDiacriticsRule(),
+        new RomanianProperNounsRule(),
+        new RomanianSpacingRule(),
+        new RomanianEmojiRule(),
+        new RomanianTypoFixRule(),
+        new RomanianDiacriticsRule(),
+        new RomanianCommaRule(),
+        new FractionGlyphRule(),
+        new UlInsteadOfURule(),
     ];
 
     /// <inheritdoc/>
