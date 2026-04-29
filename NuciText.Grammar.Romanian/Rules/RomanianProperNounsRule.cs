@@ -11,6 +11,8 @@ internal sealed class RomanianProperNounsRule : PatternReplacementRuleBase
     static readonly IReadOnlyList<RegexReplacement> replacements =
     [
         new("(?i:andrei)", "Andrei"),
+        new("(?i:batman)", "Batman"),
+        new("(?i:de ce comics)", "DC Comics"),
         new("(?i:george)", "George"),
         new("(?i:hori)", "Hori"),
         new("(?i:ioan)", "Ioan"),
@@ -19,6 +21,12 @@ internal sealed class RomanianProperNounsRule : PatternReplacementRuleBase
         new("(?i:ionut)", "Ionuț"),
         new("(?i:mada)", "Mădă"),
         new("(?i:maria)", "Maria"),
+        new("(?i:marvel)", "Marvel"),
+        new("(?i:minecraft)", "Minecraft"),
+        new("(?i:nicusor)", "Nicușor"),
+        new("(?i:pokemon)", "Pokémon"),
+        new("(?i:romania)", "România"),
+        new("(?i:spiderman)", "Spiderman"),
     ];
 
     /// <inheritdoc/>
