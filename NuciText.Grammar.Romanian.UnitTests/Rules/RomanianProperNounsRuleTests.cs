@@ -1,29 +1,31 @@
 using System;
 using NUnit.Framework;
 
-namespace NuciText.Grammar.Romanian.UnitTests.Rules;
-
-[TestFixture]
-public class RomanianProperNounsRuleTests
+namespace NuciText.Grammar.Romanian.UnitTests.Rules
 {
-    [TestCase("george", "George")]
-    [TestCase("hori", "Hori")]
-    [TestCase("ioan", "Ioan")]
-    [TestCase("ioana", "Ioana")]
-    [TestCase("romania", "România")]
-    [TestCase("pokemon", "Pokémon")]
-    public void Apply_NormalisesProperNouns(string text, string expected)
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
+    public class RomanianProperNounsRuleTests
     {
-        IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianProperNounsRule");
+        [TestCase("george", "George")]
+        [TestCase("hori", "Hori")]
+        [TestCase("ioan", "Ioan")]
+        [TestCase("ioana", "Ioana")]
+        [TestCase("romania", "România")]
+        [TestCase("pokemon", "Pokémon")]
+        public void Apply_NormalisesProperNouns(string text, string expected)
+        {
+            IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianProperNounsRule");
 
-        string result = rule.Apply(text);
+            string result = rule.Apply(text);
 
-        Assert.That(result, Is.EqualTo(expected));
-    }
+            Assert.That(result, Is.EqualTo(expected));
+        }
 
-    static IGrammarRule CreateRule(string typeName)
-    {
-        Type ruleType = typeof(RomanianGrammarCorrector).Assembly.GetType(typeName, throwOnError: true)!;
-        return (IGrammarRule)Activator.CreateInstance(ruleType, nonPublic: true)!;
+        static IGrammarRule CreateRule(string typeName)
+        {
+            Type ruleType = typeof(RomanianGrammarCorrector).Assembly.GetType(typeName, throwOnError: true)!;
+            return (IGrammarRule)Activator.CreateInstance(ruleType, nonPublic: true)!;
+        }
     }
 }

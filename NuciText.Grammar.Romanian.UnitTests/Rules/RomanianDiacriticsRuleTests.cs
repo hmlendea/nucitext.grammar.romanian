@@ -2,513 +2,353 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NuciExtensions;
+using NuciText.Grammar.Romanian.UnitTests.Helpers.Lists;
 using NUnit.Framework;
 
-namespace NuciText.Grammar.Romanian.UnitTests.Rules;
-
-[TestFixture]
-public class RomanianDiacriticsRuleTests
+namespace NuciText.Grammar.Romanian.UnitTests.Rules
 {
-    [TestCase("actualizeaza", "actualizează")]
-    [TestCase("adoarma", "adoarmă")]
-    [TestCase("ajuti", "ajuți")]
-    [TestCase("aliniaza", "aliniază")]
-    [TestCase("amanam", "amânam")]
-    [TestCase("apartine", "aparține")]
-    [TestCase("aprinda", "aprindă")]
-    [TestCase("aprinsi", "aprinși")]
-    [TestCase("as prefera", "aș prefera")]
-    [TestCase("asa", "așa")]
-    [TestCase("ascunsa", "ascunsă")]
-    [TestCase("balanta", "balanța")]
-    [TestCase("barcuta", "bărcuța")]
-    [TestCase("bosi", "boși")]
-    [TestCase("bosii", "boșii")]
-    [TestCase("bosilor", "boșilor")]
-    [TestCase("ca am", "că am")]
-    [TestCase("ca imi", "că îmi")]
-    [TestCase("cacat", "câcat")]
-    [TestCase("caine", "câine")]
-    [TestCase("castigam", "câștigam")]
-    [TestCase("castigat", "câștigat")]
-    [TestCase("catel", "cățel")]
-    [TestCase("cateva", "câteva")]
-    [TestCase("cateva", "câteva")]
-    [TestCase("cirese", "cireșe")]
-    [TestCase("citeasca", "citească")]
-    [TestCase("cladire", "clădire")]
-    [TestCase("completeaza", "completează")]
-    [TestCase("concentreaza", "concentrează")]
-    [TestCase("consideratie", "considerație")]
-    [TestCase("corecteaza", "corectează")]
-    [TestCase("cresti", "crești")]
-    [TestCase("cunoastere", "cunoaștere")]
-    [TestCase("daca", "dacă")]
-    [TestCase("defileaza", "defilează")]
-    [TestCase("definite", "definiție")]
-    [TestCase("democratia", "democrația")]
-    [TestCase("dependinta", "dependința")]
-    [TestCase("deschisa", "deschisă")]
-    [TestCase("distributie", "distribuție")]
-    [TestCase("esti", "ești")]
-    [TestCase("estimeaza", "estimează")]
-    [TestCase("facea", "făcea")]
-    [TestCase("faceam", "făceam")]
-    [TestCase("faceti", "faceți")]
-    [TestCase("fereasca", "ferească")]
-    [TestCase("fleosc", "fleoșc")]
-    [TestCase("fondata", "fondată")]
-    [TestCase("frisca", "frișca")]
-    [TestCase("functionala", "funcțională")]
-    [TestCase("functioneaza,", "funcționează,")]
-    [TestCase("functioneaza", "funcționează")]
-    [TestCase("furnicutele", "furnicutele")]
-    [TestCase("garzii", "gărzii")]
-    [TestCase("gasesc", "găsesc")]
-    [TestCase("gradinita", "grădinița")]
-    [TestCase("greseasca", "gresească")]
-    [TestCase("greselile", "greșelile")]
-    [TestCase("hranesc", "hrănesc")]
-    [TestCase("impartit", "împărțit")]
-    [TestCase("impreuna", "împreună")]
-    [TestCase("imprumut", "împrumut")]
-    [TestCase("incearca", "încearcă")]
-    [TestCase("incepem", "începem")]
-    [TestCase("ingrijorare", "îngrijorare")]
-    [TestCase("inlocuiasca", "înlocuiască")]
-    [TestCase("inot", "înot")]
-    [TestCase("inseamna", "înseamnă")]
-    [TestCase("intoarce", "întoarce")]
-    [TestCase("intreaga", "întreaga")]
-    [TestCase("iteratia", "iterația")]
-    [TestCase("iuti", "iuți")]
-    [TestCase("jucatoarele", "jucătorarele")]
-    [TestCase("libertatii", "libertății")]
-    [TestCase("logheaza", "loghează")]
-    [TestCase("mananc", "mănânc")]
-    [TestCase("mancare", "mâncare")]
-    [TestCase("mentenanta", "mentenanța")]
-    [TestCase("mentin", "mențin")]
-    [TestCase("mineaza", "minează")]
-    [TestCase("minereasca", "minerească")]
-    [TestCase("munceasca", "muncească")]
-    [TestCase("muntii", "munții")]
-    [TestCase("muti", "muți")]
-    [TestCase("nationale", "naționale")]
-    [TestCase("natiune", "națiune")]
-    [TestCase("niste", "niște")]
-    [TestCase("nivelata", "nivelată")]
-    [TestCase("noastra", "noastră")]
-    [TestCase("noptii", "nopții")]
-    [TestCase("noștri", "noștri")]
-    [TestCase("odata", "odată")]
-    [TestCase("odihneasca", "odihnească")]
-    [TestCase("odinioara", "odinioară")]
-    [TestCase("orasel", "orășel")]
-    [TestCase("orasele", "orașele")]
-    [TestCase("oraselele", "orășelele")]
-    [TestCase("orasu", "orașu")]
-    [TestCase("oua", "ouă")]
-    [TestCase("pacat", "păcat")]
-    [TestCase("pacate", "păcate")]
-    [TestCase("pacatosule", "păcătosule")]
-    [TestCase("palmuit", "pălmuit")]
-    [TestCase("pamant", "pământ")]
-    [TestCase("pamantean", "pământean")]
-    [TestCase("parea", "părea")]
-    [TestCase("parerea", "părerea")]
-    [TestCase("piata", "piața")]
-    [TestCase("placere", "plăcere")]
-    [TestCase("planuiesti", "plănuiești")]
-    [TestCase("planuit", "plănuit")]
-    [TestCase("poti sa", "poți să")]
-    [TestCase("poti", "poți")]
-    [TestCase("prefera sa", "prefera să")]
-    [TestCase("pregatit", "pregătit")]
-    [TestCase("primarie", "primărie")]
-    [TestCase("puna", "pună")]
-    [TestCase("pusca", "pușca")]
-    [TestCase("rabdare", "răbdare")]
-    [TestCase("raman", "rămân")]
-    [TestCase("ramas", "rămas")]
-    [TestCase("raspunsului", "răspunsului")]
-    [TestCase("recunoasca", "recunoască")]
-    [TestCase("reductie", "reducție")]
-    [TestCase("renuntam", "renunțăm")]
-    [TestCase("reusim", "reușim")]
-    [TestCase("ridicata", "ridicată")]
-    [TestCase("roscata", "roșcata")]
-    [TestCase("rugaciune", "rugăciune")]
-    [TestCase("ruleaza", "rulează")]
-    [TestCase("sambata", "sâmbăta")]
-    [TestCase("sansa", "șansa")]
-    [TestCase("saptamana", "săptămâna")]
-    [TestCase("saraca", "săraca")]
-    [TestCase("saracii", "săracii")]
-    [TestCase("saracilor", "săracilor")]
-    [TestCase("saracit", "săracit")]
-    [TestCase("sarat", "sărat")]
-    [TestCase("sarbatoare", "sărbătoare")]
-    [TestCase("sarit", "sărit")]
-    [TestCase("sarpe", "șarpe")]
-    [TestCase("scoasa", "scoasă")]
-    [TestCase("scobeste", "scobește")]
-    [TestCase("scolile", "școlile")]
-    [TestCase("scuzati", "scuzați")]
-    [TestCase("semneaza", "semnează")]
-    [TestCase("serupit", "șerpuit")]
-    [TestCase("sfarseasca", "sfârșească")]
-    [TestCase("sfinteasca", "sfințească")]
-    [TestCase("slefuit", "șlefuit")]
-    [TestCase("slefuita", "șlefuita")]
-    [TestCase("spalat", "spălat")]
-    [TestCase("sparga", "spargă")]
-    [TestCase("spatiu", "spațiu")]
-    [TestCase("stanga", "stânga")]
-    [TestCase("starneste", "stârnește")]
-    [TestCase("stiu", "știu")]
-    [TestCase("stramt", "strâmt")]
-    [TestCase("stropeasca", "stropească")]
-    [TestCase("susta", "șusta")]
-    [TestCase("taieri", "tăieri")]
-    [TestCase("tarnacop", "târnăcop")]
-    [TestCase("teava", "țeava")]
-    [TestCase("teleporteaza", "teleportează")]
-    [TestCase("temnita", "temnița")]
-    [TestCase("temnite", "temnițe")]
-    [TestCase("tipai", "țipai")]
-    [TestCase("tipam", "țipam")]
-    [TestCase("tipat", "țipat")]
-    [TestCase("totii", "toții")]
-    [TestCase("totusi", "totuși")]
-    [TestCase("trantesc", "trântesc")]
-    [TestCase("trânteasca", "trântească")]
-    [TestCase("urmaresc", "urmăresc")]
-    [TestCase("vamala", "vamală")]
-    [TestCase("veniti", "veniți")]
-    [TestCase("viata", "viața")]
-    [TestCase("vietii", "vieții")]
-    [TestCase("voiasca", "voiască")]
-    [TestCase("voiati", "voiați")]
-    [TestCase("vopseasca", "vopsească")]
-    [TestCase("vorbeasca", "vorbească")]
-    [TestCase("voteaza", "votează")]
-    [TestCase("voua", "vouă")]
-    [TestCase("vreti", "vreți")]
-    public void Apply_AddsExpectedDiacritics(string text, string expected)
+    [TestFixture]
+    [Parallelizable(ParallelScope.All)]
+    public class RomanianDiacriticsRuleTests
     {
-        IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianDiacriticsRule");
-
-        string result = rule.Apply(text);
-
-        Assert.That(result, Is.EqualTo(expected));
-    }
-
-    [Test]
-    [TestCase("abandonat")]
-    [TestCase("achiziționat")]
-    [TestCase("actualizat")]
-    [TestCase("adânc")]
-    [TestCase("adus")]
-    [TestCase("aduși")]
-    [TestCase("agent")]
-    [TestCase("aiurist")]
-    [TestCase("ajutat")]
-    [TestCase("ales")]
-    [TestCase("alimentat")]
-    [TestCase("aliniat")]
-    [TestCase("alocat")]
-    [TestCase("amânat")]
-    [TestCase("apărut")]
-    [TestCase("aprins")]
-    [TestCase("apropriat")]
-    [TestCase("ars")]
-    [TestCase("aruncat")]
-    [TestCase("ascultat")]
-    [TestCase("ascultător")]
-    [TestCase("ascuns")]
-    [TestCase("aspirat")]
-    [TestCase("astupat")]
-    [TestCase("atenționat")]
-    [TestCase("aurist")]
-    [TestCase("avertizat")]
-    [TestCase("avocat")]
-    [TestCase("avut")]
-    [TestCase("binecuvântat")]
-    [TestCase("bogat")]
-    [TestCase("bot")]
-    [TestCase("bucătar")]
-    [TestCase("călcat")]
-    [TestCase("călduț")]
-    [TestCase("căpitan")]
-    [TestCase("câștigător")]
-    [TestCase("centrist")]
-    [TestCase("cerșetor")]
-    [TestCase("cireș")]
-    [TestCase("ciupitist")]
-    [TestCase("comandant")]
-    [TestCase("comandat")]
-    [TestCase("comunist")]
-    [TestCase("confirmat")]
-    [TestCase("constructor")]
-    [TestCase("construit")]
-    [TestCase("craftat")]
-    [TestCase("credincios")]
-    [TestCase("crescut")]
-    [TestCase("creștin")]
-    [TestCase("cules")]
-    [TestCase("cumpărat")]
-    [TestCase("cunoscut")]
-    [TestCase("curat")]
-    [TestCase("cuțitar")]
-    [TestCase("delegat")]
-    [TestCase("democrat")]
-    [TestCase("depărtat")]
-    [TestCase("depășit")]
-    [TestCase("dependent")]
-    [TestCase("depozitat")]
-    [TestCase("descărcat")]
-    [TestCase("deschis")]
-    [TestCase("descoperit")]
-    [TestCase("desprins")]
-    [TestCase("dichisit")]
-    [TestCase("dispărut")]
-    [TestCase("doborât")]
-    [TestCase("dormit")]
-    [TestCase("drăguț")]
-    [TestCase("dușman")]
-    [TestCase("enoriaș")]
-    [TestCase("estimat")]
-    [TestCase("excavat")]
-    [TestCase("expirat")]
-    [TestCase("familist")]
-    [TestCase("fascist")]
-    [TestCase("făcut")]
-    [TestCase("ferit")]
-    [TestCase("fiert")]
-    [TestCase("frânt")]
-    [TestCase("funcțional")]
-    [TestCase("găsit")]
-    [TestCase("georgist")]
-    [TestCase("hrănit")]
-    [TestCase("ieșit")]
-    [TestCase("inculpat")]
-    [TestCase("inspirat")]
-    [TestCase("interesat")]
-    [TestCase("intrat")]
-    [TestCase("împărat")]
-    [TestCase("împrumutat")]
-    [TestCase("împușcat")]
-    [TestCase("împuțit")]
-    [TestCase("încălțat")]
-    [TestCase("încălzit")]
-    [TestCase("încărcat")]
-    [TestCase("închis")]
-    [TestCase("îndepărtat")]
-    [TestCase("înghețat")]
-    [TestCase("înmulțit")]
-    [TestCase("întâmpinat")]
-    [TestCase("întârziat")]
-    [TestCase("întreg")]
-    [TestCase("jucat")]
-    [TestCase("jucător")]
-    [TestCase("judecător")]
-    [TestCase("lăsat")]
-    [TestCase("liniștit")]
-    [TestCase("locotenent")]
-    [TestCase("lucrător")]
-    [TestCase("luptător")]
-    [TestCase("mareșal")]
-    [TestCase("măsurat")]
-    [TestCase("mâncat")]
-    [TestCase("meseriaș")]
-    [TestCase("meticulos")]
-    [TestCase("minerit")]
-    [TestCase("moderat")]
-    [TestCase("modificat")]
-    [TestCase("mort")]
-    [TestCase("muist")]
-    [TestCase("muncit")]
-    [TestCase("naționalist")]
-    [TestCase("nazist")]
-    [TestCase("necredincios")]
-    [TestCase("nesimțit")]
-    [TestCase("nihilist")]
-    [TestCase("numărat")]
-    [TestCase("obosit")]
-    [TestCase("observat")]
-    [TestCase("odihnit")]
-    [TestCase("omorât")]
-    [TestCase("onorat")]
-    [TestCase("operat")]
-    [TestCase("ostaș")]
-    [TestCase("oxidat")]
-    [TestCase("păcătos")]
-    [TestCase("perfect")]
-    [TestCase("pierdut")]
-    [TestCase("pilot")]
-    [TestCase("pirat")]
-    [TestCase("pivot")]
-    [TestCase("plantat")]
-    [TestCase("polițist")]
-    [TestCase("poștaș")]
-    [TestCase("potrivit")]
-    [TestCase("prefect")]
-    [TestCase("preferat")]
-    [TestCase("preot")]
-    [TestCase("prinși")]
-    [TestCase("progresist")]
-    [TestCase("prost")]
-    [TestCase("purist")]
-    [TestCase("pușcat")]
-    [TestCase("răposat")]
-    [TestCase("războinic")]
-    [TestCase("roșcat")]
-    [TestCase("salvat")]
-    [TestCase("savant")]
-    [TestCase("săpat")]
-    [TestCase("sărac")]
-    [TestCase("schimbător")]
-    [TestCase("semănat")]
-    [TestCase("simțit")]
-    [TestCase("sinucis")]
-    [TestCase("socialist")]
-    [TestCase("soldat")]
-    [TestCase("soroșist")]
-    [TestCase("spânzurat")]
-    [TestCase("spectaculos")]
-    [TestCase("speriat")]
-    [TestCase("stareț")]
-    [TestCase("stins")]
-    [TestCase("surprins")]
-    [TestCase("șef")]
-    [TestCase("șobolan")]
-    [TestCase("șofer")]
-    [TestCase("tanchist")]
-    [TestCase("tâlhar")]
-    [TestCase("tâmpit")]
-    [TestCase("tâmplar")]
-    [TestCase("terminat")]
-    [TestCase("trântit")]
-    [TestCase("trecut")]
-    [TestCase("trimis")]
-    [TestCase("turist")]
-    [TestCase("țăran")]
-    [TestCase("ucis")]
-    [TestCase("umplut")]
-    [TestCase("următor")]
-    [TestCase("urs")]
-    [TestCase("validat")]
-    [TestCase("vameș")]
-    [TestCase("vărsat")]
-    [TestCase("vărsător")]
-    [TestCase("văzut")]
-    [TestCase("vândut")]
-    [TestCase("vânzător")]
-    [TestCase("vinovat")]
-    [TestCase("visător")]
-    [TestCase("vizat")]
-    [TestCase("vizitat")]
-    [TestCase("vrut")]
-    public void GivenMasculineAdjectiveOrNoun_WhenApplyingTheRule_ThenAllVariationsAreAsExpected(string expectedNoun)
-    {
-        string[] suffixes = ["", "i", "ii", "ilor", "ul", "ului"];
-        IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianDiacriticsRule");
-
-        List<string> inputNouns = [expectedNoun, expectedNoun.RemoveDiacritics()];
-
-        for (int i = 0; i < expectedNoun.Length; i++)
+        private static IEnumerable<TestCaseData> FeminineNounEndingWithIeVariationTestCases()
         {
-            break;
-            char c = expectedNoun[i];
+            string[] suffixes = ["a", "e", "ei", "i", "ile", "ilor"];
 
-            if (c == 'ă' || c == 'â')
+            foreach (var expectedNoun in FeminineNounsEndingWithIe.Values)
             {
-                inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
-                inputNouns.Add(expectedNoun[..i] + 'a' + expectedNoun[(i + 1)..]);
-            }
-            if (c == 'î')
-            {
-                inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
-                inputNouns.Add(expectedNoun[..i] + 'i' + expectedNoun[(i + 1)..]);
-            }
-            if (c == 'ș')
-            {
-                inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
-                inputNouns.Add(expectedNoun[..i] + 's' + expectedNoun[(i + 1)..]);
-            }
-            if (c == 'ț')
-            {
-                inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
-                inputNouns.Add(expectedNoun[..i] + 't' + expectedNoun[(i + 1)..]);
-            }
-        }
+                string baseExpectedNoun = expectedNoun[..^1];
+                List<string> inputNouns = GenerateInputNouns(expectedNoun);
 
-        inputNouns = [.. inputNouns.Distinct()];
-
-        foreach (string originalNoun in inputNouns)
-        {
-            foreach (string suffix in suffixes)
-            {
-                string result = rule.Apply(originalNoun + suffix);
-
-                if (suffix.StartsWith("i", StringComparison.Ordinal))
+                foreach (var inputNoun in inputNouns)
                 {
-                    if (originalNoun.EndsWith("st", StringComparison.Ordinal) &&
-                        expectedNoun.EndsWith("st", StringComparison.Ordinal))
+                    string baseInputNoun = inputNoun[..^1];
+
+                    foreach (string suffix in suffixes)
                     {
-                        expectedNoun = expectedNoun[..^2] + "șt";
-                    }
-                    else if (originalNoun.EndsWith("t", StringComparison.Ordinal) &&
-                            expectedNoun.EndsWith("t", StringComparison.Ordinal))
-                    {
-                        expectedNoun = expectedNoun[..^1] + "ț";
-                    }
-                    else if (originalNoun.EndsWith("s", StringComparison.Ordinal) &&
-                            expectedNoun.EndsWith("s", StringComparison.Ordinal))
-                    {
-                        expectedNoun = expectedNoun[..^1] + "ș";
+                        string expectedWithSuffix = ComputeExpectedWithSuffix(
+                            baseExpectedNoun,
+                            baseInputNoun,
+                            suffix);
+
+                        yield return
+                            new TestCaseData(baseInputNoun, suffix, expectedWithSuffix)
+                                .SetName($"{expectedNoun} + '{inputNoun}' + '{suffix}'");
                     }
                 }
-
-                Assert.That(result, Is.EqualTo(expectedNoun + suffix));
             }
         }
-    }
 
-    [Test]
-    [TestCase("aparat")]
-    [TestCase("comanda")]
-    [TestCase("consuma")]
-    [TestCase("costa")]
-    [TestCase("doua")]
-    [TestCase("garda")]
-    [TestCase("mutam")]
-    [TestCase("necesitam")]
-    [TestCase("palma")]
-    [TestCase("pita")]
-    [TestCase("scoala")]
-    [TestCase("stima")]
-    [TestCase("strada")]
-    [TestCase("strigat")]
-    [TestCase("suta")]
-    [TestCase("terminam")]
-    [TestCase("tipa")]
-    [TestCase("tipi")]
-    [TestCase("urma")]
-    [TestCase("vina")]
-    public void GivenDiacriticlessWord_WhenThereIsAmbiguity_ThenDiacriticsAreNotAdded(string text)
-    {
-        IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianDiacriticsRule");
+        private static IEnumerable<TestCaseData> MasculineNounVariationTestCases()
+        {
+            var suffixes = new[] { "", "i", "ii", "ilor", "ul", "ule", "ului" };
 
-        string result = rule.Apply(text);
+            foreach (var expectedNoun in MasculineNouns.Values)
+            {
+                var inputNouns = GenerateInputNouns(expectedNoun);
 
-        Assert.That(result, Is.EqualTo(text));
-    }
+                foreach (var inputNoun in inputNouns)
+                {
+                    foreach (var suffix in suffixes)
+                    {
+                        var expectedWithSuffix = ComputeExpectedWithSuffix(expectedNoun, inputNoun, suffix);
 
-    static IGrammarRule CreateRule(string typeName)
-    {
-        Type ruleType = typeof(RomanianGrammarCorrector).Assembly.GetType(typeName, throwOnError: true)!;
-        return (IGrammarRule)Activator.CreateInstance(ruleType, nonPublic: true)!;
+                        yield return new TestCaseData(inputNoun, suffix, expectedWithSuffix)
+                            .SetName($"{expectedNoun} + '{inputNoun}' + '{suffix}'");
+                    }
+                }
+            }
+        }
+
+        private static List<string> GenerateInputNouns(string expectedNoun)
+        {
+            List<string> inputNouns = [expectedNoun, expectedNoun.RemoveDiacritics()];
+
+            for (int i = 0; i < expectedNoun.Length; i++)
+            {
+                char c = expectedNoun[i];
+
+                if (c == 'ă' || c == 'â')
+                {
+                    inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
+                    inputNouns.Add(expectedNoun[..i] + 'a' + expectedNoun[(i + 1)..]);
+                }
+                if (c == 'î')
+                {
+                    inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
+                    inputNouns.Add(expectedNoun[..i] + 'i' + expectedNoun[(i + 1)..]);
+                }
+                if (c == 'ș')
+                {
+                    inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
+                    inputNouns.Add(expectedNoun[..i] + 's' + expectedNoun[(i + 1)..]);
+                }
+                if (c == 'ț')
+                {
+                    inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
+                    inputNouns.Add(expectedNoun[..i] + 't' + expectedNoun[(i + 1)..]);
+                }
+            }
+
+            return [.. inputNouns.Distinct()];
+        }
+
+        private static string ComputeExpectedWithSuffix(string expectedNoun, string inputNoun, string suffix)
+        {
+            var result = expectedNoun;
+
+            if (suffix.StartsWith("i", StringComparison.Ordinal))
+            {
+                if (inputNoun.EndsWith("st", StringComparison.Ordinal) &&
+                    expectedNoun.EndsWith("st", StringComparison.Ordinal))
+                {
+                    result = expectedNoun[..^2] + "șt";
+                }
+                else if (inputNoun.EndsWith("t", StringComparison.Ordinal) &&
+                        expectedNoun.EndsWith("t", StringComparison.Ordinal))
+                {
+                    result = expectedNoun[..^1] + "ț";
+                }
+                else if (inputNoun.EndsWith("s", StringComparison.Ordinal) &&
+                        expectedNoun.EndsWith("s", StringComparison.Ordinal))
+                {
+                    result = expectedNoun[..^1] + "ș";
+                }
+            }
+
+            return result + suffix;
+        }
+
+        [TestCase("actualizeaza", "actualizează")]
+        [TestCase("adoarma", "adoarmă")]
+        [TestCase("ajuti", "ajuți")]
+        [TestCase("aliniaza", "aliniază")]
+        [TestCase("amanam", "amânam")]
+        [TestCase("apartine", "aparține")]
+        [TestCase("aprinda", "aprindă")]
+        [TestCase("as prefera", "aș prefera")]
+        [TestCase("asa", "așa")]
+        [TestCase("ascunsa", "ascunsă")]
+        [TestCase("balanta", "balanța")]
+        [TestCase("barcuta", "bărcuța")]
+        [TestCase("ca am", "că am")]
+        [TestCase("ca imi", "că îmi")]
+        [TestCase("caine", "câine")]
+        [TestCase("castigam", "câștigam")]
+        [TestCase("castigat", "câștigat")]
+        [TestCase("catel", "cățel")]
+        [TestCase("cateva", "câteva")]
+        [TestCase("cateva", "câteva")]
+        [TestCase("cirese", "cireșe")]
+        [TestCase("citeasca", "citească")]
+        [TestCase("cladire", "clădire")]
+        [TestCase("completeaza", "completează")]
+        [TestCase("concentreaza", "concentrează")]
+        [TestCase("corecteaza", "corectează")]
+        [TestCase("cresti", "crești")]
+        [TestCase("cunoastere", "cunoaștere")]
+        [TestCase("daca", "dacă")]
+        [TestCase("defileaza", "defilează")]
+        [TestCase("dependinta", "dependința")]
+        [TestCase("deschisa", "deschisă")]
+        [TestCase("esti", "ești")]
+        [TestCase("estimeaza", "estimează")]
+        [TestCase("facea", "făcea")]
+        [TestCase("faceam", "făceam")]
+        [TestCase("faceti", "faceți")]
+        [TestCase("fereasca", "ferească")]
+        [TestCase("fleosc", "fleoșc")]
+        [TestCase("fondata", "fondată")]
+        [TestCase("frisca", "frișca")]
+        [TestCase("functionala", "funcțională")]
+        [TestCase("functioneaza,", "funcționează,")]
+        [TestCase("functioneaza", "funcționează")]
+        [TestCase("furnicutele", "furnicutele")]
+        [TestCase("garzii", "gărzii")]
+        [TestCase("gasesc", "găsesc")]
+        [TestCase("gradinita", "grădinița")]
+        [TestCase("greseasca", "gresească")]
+        [TestCase("greselile", "greșelile")]
+        [TestCase("hranesc", "hrănesc")]
+        [TestCase("impreuna", "împreună")]
+        [TestCase("incearca", "încearcă")]
+        [TestCase("incepem", "începem")]
+        [TestCase("ingrijorare", "îngrijorare")]
+        [TestCase("inlocuiasca", "înlocuiască")]
+        [TestCase("inot", "înot")]
+        [TestCase("inseamna", "înseamnă")]
+        [TestCase("intoarce", "întoarce")]
+        [TestCase("intreaga", "întreaga")]
+        [TestCase("iuti", "iuți")]
+        [TestCase("jucatoarele", "jucătorarele")]
+        [TestCase("libertatii", "libertății")]
+        [TestCase("logheaza", "loghează")]
+        [TestCase("mananc", "mănânc")]
+        [TestCase("mancare", "mâncare")]
+        [TestCase("mentenanta", "mentenanța")]
+        [TestCase("mentin", "mențin")]
+        [TestCase("mineaza", "minează")]
+        [TestCase("minereasca", "minerească")]
+        [TestCase("munceasca", "muncească")]
+        [TestCase("muntii", "munții")]
+        [TestCase("nationale", "naționale")]
+        [TestCase("natiune", "națiune")]
+        [TestCase("necesiteaza", "necesitează")]
+        [TestCase("niste", "niște")]
+        [TestCase("nivelata", "nivelată")]
+        [TestCase("noastra", "noastră")]
+        [TestCase("noptii", "nopții")]
+        [TestCase("noștri", "noștri")]
+        [TestCase("odata", "odată")]
+        [TestCase("odihneasca", "odihnească")]
+        [TestCase("odinioara", "odinioară")]
+        [TestCase("orasel", "orășel")]
+        [TestCase("orasele", "orașele")]
+        [TestCase("oraselele", "orășelele")]
+        [TestCase("orasu", "orașu")]
+        [TestCase("oua", "ouă")]
+        [TestCase("pacat", "păcat")]
+        [TestCase("pacate", "păcate")]
+        [TestCase("pamant", "pământ")]
+        [TestCase("pamantean", "pământean")]
+        [TestCase("parea", "părea")]
+        [TestCase("parerea", "părerea")]
+        [TestCase("piata", "piața")]
+        [TestCase("placere", "plăcere")]
+        [TestCase("planuiesti", "plănuiești")]
+        [TestCase("planuit", "plănuit")]
+        [TestCase("poti sa", "poți să")]
+        [TestCase("poti", "poți")]
+        [TestCase("puna", "pună")]
+        [TestCase("pusca", "pușca")]
+        [TestCase("rabdare", "răbdare")]
+        [TestCase("raman", "rămân")]
+        [TestCase("raspunsului", "răspunsului")]
+        [TestCase("recunoasca", "recunoască")]
+        [TestCase("renuntam", "renunțăm")]
+        [TestCase("reusim", "reușim")]
+        [TestCase("ridicata", "ridicată")]
+        [TestCase("roscata", "roșcata")]
+        [TestCase("rugaciune", "rugăciune")]
+        [TestCase("ruleaza", "rulează")]
+        [TestCase("sambata", "sâmbăta")]
+        [TestCase("sansa", "șansa")]
+        [TestCase("saptamana", "săptămâna")]
+        [TestCase("saraca", "săraca")]
+        [TestCase("saracii", "săracii")]
+        [TestCase("saracilor", "săracilor")]
+        [TestCase("saracit", "săracit")]
+        [TestCase("sarat", "sărat")]
+        [TestCase("sarbatoare", "sărbătoare")]
+        [TestCase("sarpe", "șarpe")]
+        [TestCase("scoasa", "scoasă")]
+        [TestCase("scobeste", "scobește")]
+        [TestCase("scolile", "școlile")]
+        [TestCase("scuzati", "scuzați")]
+        [TestCase("semneaza", "semnează")]
+        [TestCase("sfarseasca", "sfârșească")]
+        [TestCase("sfinteasca", "sfințească")]
+        [TestCase("slefuita", "șlefuita")]
+        [TestCase("sparga", "spargă")]
+        [TestCase("spatiu", "spațiu")]
+        [TestCase("stanga", "stânga")]
+        [TestCase("starneste", "stârnește")]
+        [TestCase("stiu", "știu")]
+        [TestCase("stramt", "strâmt")]
+        [TestCase("stropeasca", "stropească")]
+        [TestCase("susta", "șusta")]
+        [TestCase("taieri", "tăieri")]
+        [TestCase("tarnacop", "târnăcop")]
+        [TestCase("teava", "țeava")]
+        [TestCase("teleporteaza", "teleportează")]
+        [TestCase("temnita", "temnița")]
+        [TestCase("temnite", "temnițe")]
+        [TestCase("tipai", "țipai")]
+        [TestCase("tipam", "țipam")]
+        [TestCase("totusi", "totuși")]
+        [TestCase("trantesc", "trântesc")]
+        [TestCase("trânteasca", "trântească")]
+        [TestCase("urmaresc", "urmăresc")]
+        [TestCase("vamala", "vamală")]
+        [TestCase("viata", "viața")]
+        [TestCase("vietii", "vieții")]
+        [TestCase("voiasca", "voiască")]
+        [TestCase("voiati", "voiați")]
+        [TestCase("vopseasca", "vopsească")]
+        [TestCase("vorbeasca", "vorbească")]
+        [TestCase("voteaza", "votează")]
+        [TestCase("voua", "vouă")]
+        [TestCase("vreti", "vreți")]
+        public void Apply_AddsExpectedDiacritics(string text, string expected)
+        {
+            IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianDiacriticsRule");
+
+            string result = rule.Apply(text);
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(FeminineNounEndingWithIeVariationTestCases))]
+        public void GivenFeminineNounEndingWithIe_WhenApplyingTheRule_ThenAllVariationsAreAsExpected(
+            string inputNoun, string suffix, string expectedWithSuffix)
+        {
+            IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianDiacriticsRule");
+
+            string result = rule.Apply(inputNoun + suffix);
+
+            Assert.That(result, Is.EqualTo(expectedWithSuffix));
+        }
+
+        [Test]
+        [TestCaseSource(nameof(MasculineNounVariationTestCases))]
+        public void GivenMasculineAdjectiveOrNoun_WhenApplyingTheRule_ThenAllVariationsAreAsExpected(
+            string inputNoun, string suffix, string expectedWithSuffix)
+        {
+            IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianDiacriticsRule");
+
+            string result = rule.Apply(inputNoun + suffix);
+
+            Assert.That(result, Is.EqualTo(expectedWithSuffix));
+        }
+
+        [Test]
+        [TestCase("aparat")]
+        [TestCase("comanda")]
+        [TestCase("consuma")]
+        [TestCase("costa")]
+        [TestCase("doua")]
+        [TestCase("dubla")]
+        [TestCase("garda")]
+        [TestCase("mutam")]
+        [TestCase("natura")]
+        [TestCase("necesitam")]
+        [TestCase("palma")]
+        [TestCase("pita")]
+        [TestCase("scoala")]
+        [TestCase("stima")]
+        [TestCase("strada")]
+        [TestCase("strigat")]
+        [TestCase("suna")]
+        [TestCase("suta")]
+        [TestCase("terminam")]
+        [TestCase("tipa")]
+        [TestCase("tipi")]
+        [TestCase("urma")]
+        [TestCase("vina")]
+        public void GivenDiacriticlessWord_WhenThereIsAmbiguity_ThenDiacriticsAreNotAdded(string text)
+        {
+            IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianDiacriticsRule");
+
+            string result = rule.Apply(text);
+
+            Assert.That(result, Is.EqualTo(text));
+        }
+
+        static IGrammarRule CreateRule(string typeName)
+        {
+            Type ruleType = typeof(RomanianGrammarCorrector).Assembly.GetType(typeName, throwOnError: true)!;
+            return (IGrammarRule)Activator.CreateInstance(ruleType, nonPublic: true)!;
+        }
     }
 }
