@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace NuciText.Grammar.Romanian.UnitTests.Rules;
@@ -124,6 +125,7 @@ public class RomanianDiacriticsRuleTests
     [TestCase("pregatit", "pregătit")]
     [TestCase("primarie", "primărie")]
     [TestCase("puna", "pună")]
+    [TestCase("pusca", "pușca")]
     [TestCase("rabdare", "răbdare")]
     [TestCase("raman", "rămân")]
     [TestCase("ramas", "rămas")]
@@ -202,129 +204,274 @@ public class RomanianDiacriticsRuleTests
 
     [Test]
     [TestCase("abandonat", "abandonat")]
+    [TestCase("achizitionat", "achiziționat")]
     [TestCase("actualizat", "actualizat")]
     [TestCase("adanc", "adânc")]
+    [TestCase("adus", "adus")]
+    [TestCase("adusi", "aduși")]
+    [TestCase("agent", "agent")]
+    [TestCase("aiurist", "aiurist")]
     [TestCase("ajutat", "ajutat")]
+    [TestCase("ales", "ales")]
+    [TestCase("alimentat", "alimentat")]
     [TestCase("aliniat", "aliniat")]
+    [TestCase("alocat", "alocat")]
     [TestCase("amanat", "amânat")]
+    [TestCase("aparut", "apărut")]
     [TestCase("aprins", "aprins")]
+    [TestCase("apropriat", "apropriat")]
     [TestCase("ars", "ars")]
+    [TestCase("aruncat", "aruncat")]
     [TestCase("ascultat", "ascultat")]
     [TestCase("ascultator", "ascultător")]
     [TestCase("ascuns", "ascuns")]
+    [TestCase("aspirat", "aspirat")]
+    [TestCase("astupat", "astupat")]
+    [TestCase("atentionat", "atenționat")]
+    [TestCase("aurist", "aurist")]
+    [TestCase("avertizat", "avertizat")]
+    [TestCase("avocat", "avocat")]
     [TestCase("avut", "avut")]
+    [TestCase("binecuvantat", "binecuvântat")]
     [TestCase("bogat", "bogat")]
+    [TestCase("bot", "bot")]
+    [TestCase("bucatar", "bucătar")]
+    [TestCase("calcat", "călcat")]
+    [TestCase("caldut", "călduț")]
+    [TestCase("capitan", "căpitan")]
     [TestCase("castigator", "câștigător")]
+    [TestCase("centrist", "centrist")]
     [TestCase("cersetor", "cerșetor")]
     [TestCase("cires", "cireș")]
+    [TestCase("ciupitist", "ciupitist")]
+    [TestCase("comandant", "comandant")]
+    [TestCase("comandat", "comandat")]
     [TestCase("comunist", "comunist")]
     [TestCase("confirmat", "confirmat")]
+    [TestCase("constructor", "constructor")]
+    [TestCase("construit", "construit")]
+    [TestCase("craftat", "craftat")]
+    [TestCase("credincios", "credincios")]
     [TestCase("crescut", "crescut")]
+    [TestCase("crestin", "creștin")]
+    [TestCase("cules", "cules")]
+    [TestCase("cumparat", "cumpărat")]
     [TestCase("cunoscut", "cunoscut")]
+    [TestCase("curat", "curat")]
+    [TestCase("cutitar", "cuțitar")]
     [TestCase("delegat", "delegat")]
     [TestCase("democrat", "democrat")]
+    [TestCase("departat", "depărtat")]
     [TestCase("depasit", "depășit")]
     [TestCase("dependent", "dependent")]
+    [TestCase("depozitat", "depozitat")]
+    [TestCase("descarcat", "descărcat")]
     [TestCase("deschis", "deschis")]
+    [TestCase("descoperit", "descoperit")]
     [TestCase("desprins", "desprins")]
+    [TestCase("dichisit", "dichisit")]
+    [TestCase("diparut", "dispărut")]
+    [TestCase("doborat", "doborât")]
     [TestCase("dormit", "dormit")]
+    [TestCase("dragut", "drăguț")]
     [TestCase("dusman", "dușman")]
     [TestCase("enorias", "enoriaș")]
     [TestCase("estimat", "estimat")]
+    [TestCase("excavat", "excavat")]
+    [TestCase("expirat", "expirat")]
     [TestCase("facut", "făcut")]
+    [TestCase("familist", "familist")]
     [TestCase("fascist", "fascist")]
     [TestCase("ferit", "ferit")]
     [TestCase("fiert", "fiert")]
+    [TestCase("frant", "frânt")]
     [TestCase("functional", "funcțional")]
     [TestCase("gasit", "găsit")]
+    [TestCase("georgist", "georgist")]
+    [TestCase("hranit", "hrănit")]
+    [TestCase("iesit", "ieșit")]
+    [TestCase("imparat", "împărat")]
     [TestCase("imprumutat", "împrumutat")]
-    [TestCase("imprumutat", "împrumutat")]
+    [TestCase("impuscat", "împușcat")]
+    [TestCase("imputit", "împuțit")]
     [TestCase("incaltat", "încălțat")]
+    [TestCase("incalzit", "încălzit")]
+    [TestCase("incarcat", "încărcat")]
     [TestCase("inchis", "închis")]
     [TestCase("inculpat", "inculpat")]
+    [TestCase("indepartat", "îndepărtat")]
+    [TestCase("inghtat", "înghețat")]
+    [TestCase("inmultit", "înmulțit")]
+    [TestCase("inspirat", "inspirat")]
     [TestCase("intampinat", "întâmpinat")]
     [TestCase("intarziat", "întârziat")]
     [TestCase("interesat", "interesat")]
+    [TestCase("intrat", "intrat")]
     [TestCase("intreg", "întreg")]
+    [TestCase("jucat", "jucat")]
     [TestCase("jucator", "jucător")]
     [TestCase("judecator", "judecător")]
+    [TestCase("lasat", "lăsat")]
     [TestCase("linistit", "liniștit")]
+    [TestCase("locotenent", "locotenent")]
     [TestCase("lucrator", "lucrător")]
     [TestCase("luptator", "luptător")]
     [TestCase("mancat", "mâncat")]
+    [TestCase("maresal", "mareșal")]
+    [TestCase("masurat", "măsurat")]
     [TestCase("meserias", "meseriaș")]
+    [TestCase("minerit", "minerit")]
+    [TestCase("moderat", "moderat")]
+    [TestCase("modificat", "modificat")]
     [TestCase("mort", "mort")]
+    [TestCase("muist", "muist")]
+    [TestCase("muncit", "muncit")]
     [TestCase("nationalist", "naționalist")]
     [TestCase("nazist", "nazist")]
+    [TestCase("necredincios", "necredincios")]
+    [TestCase("nesimtit", "nesimțit")]
+    [TestCase("nihilist", "nihilist")]
+    [TestCase("numarat", "numărat")]
+    [TestCase("obosit", "obosit")]
+    [TestCase("observat", "observat")]
+    [TestCase("odihnit", "odihnit")]
     [TestCase("omorat", "omorât")]
     [TestCase("onorat", "onorat")]
     [TestCase("operat", "operat")]
+    [TestCase("oxidat", "oxidat")]
     [TestCase("pacatos", "păcătos")]
+    [TestCase("perfect", "perfect")]
+    [TestCase("pierdut", "pierdut")]
+    [TestCase("pilot", "pilot")]
     [TestCase("pirat", "pirat")]
+    [TestCase("pivot", "pivot")]
+    [TestCase("plantat", "plantat")]
     [TestCase("politist", "polițist")]
     [TestCase("postas", "poștaș")]
+    [TestCase("prefect", "prefect")]
     [TestCase("preferat", "preferat")]
     [TestCase("preot", "preot")]
+    [TestCase("prins", "prinși")]
+    [TestCase("progresist", "progresist")]
     [TestCase("prost", "prost")]
+    [TestCase("purist", "purist")]
+    [TestCase("puscat", "pușcat")]
+    [TestCase("raposat", "răposat")]
     [TestCase("razboinic", "războinic")]
     [TestCase("roscat", "roșcat")]
+    [TestCase("salvat", "salvat")]
+    [TestCase("sapat", "săpat")]
     [TestCase("sarac", "sărac")]
+    [TestCase("savant", "savant")]
     [TestCase("sef", "șef")]
+    [TestCase("semanat", "semănat")]
+    [TestCase("simtit", "simțit")]
+    [TestCase("sinucis", "sinucis")]
     [TestCase("sobolan", "șobolan")]
+    [TestCase("socialist", "socialist")]
+    [TestCase("sofer", "șofer")]
     [TestCase("soldat", "soldat")]
+    [TestCase("sorosist", "soroșist")]
+    [TestCase("spanzurat", "spânzurat")]
+    [TestCase("spectaculos", "spectaculos")]
+    [TestCase("speriat", "speriat")]
+    [TestCase("staret", "stareț")]
     [TestCase("stins", "stins")]
+    [TestCase("surprins", "surprins")]
     [TestCase("talhar", "tâlhar")]
     [TestCase("tampit", "tâmpit")]
     [TestCase("tamplar", "tâmplar")]
+    [TestCase("tanchist", "tanchist")]
     [TestCase("taran", "țăran")]
     [TestCase("terminat", "terminat")]
     [TestCase("trantit", "trântit")]
+    [TestCase("trecut", "trecut")]
+    [TestCase("trimis", "trimis")]
     [TestCase("turist", "turist")]
     [TestCase("ucis", "ucis")]
+    [TestCase("umplut", "umplut")]
     [TestCase("urmator", "următor")]
     [TestCase("urs", "urs")]
+    [TestCase("validat", "validat")]
     [TestCase("vames", "vameș")]
+    [TestCase("vandut", "vândut")]
     [TestCase("vanzator", "vânzător")]
+    [TestCase("varsat", "vărsat")]
     [TestCase("varsator", "vărsător")]
+    [TestCase("vazut", "văzut")]
     [TestCase("vinovat", "vinovat")]
+    [TestCase("visator", "visător")]
     [TestCase("vizat", "vizat")]
     [TestCase("vizitat", "vizitat")]
     [TestCase("vrut", "vrut")]
     public void GivenMasculineAdjectiveOrNoun_WhenApplyingTheRule_ThenAllVariationsAreAsExpected(
-        string originalNoun,
+        string originalNoun2,
         string expectedNoun)
     {
         string[] suffixes = ["", "i", "ii", "ilor", "ul", "ului"];
         IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianDiacriticsRule");
 
-        foreach (string suffix in suffixes)
+        List<string> inputNouns = [originalNoun2];
+
+        for (int i = 0; i < expectedNoun.Length; i++)
         {
-            string result = rule.Apply(originalNoun + suffix);
+            break;
+            char c = expectedNoun[i];
 
-            if (suffix.StartsWith("i", StringComparison.Ordinal))
+            if (c == 'ă' || c == 'â')
             {
-                if (originalNoun.EndsWith("st", StringComparison.Ordinal) &&
-                    expectedNoun.EndsWith("st", StringComparison.Ordinal))
-                {
-                    expectedNoun = expectedNoun[..^2] + "șt";
-                }
-                else if (originalNoun.EndsWith("t", StringComparison.Ordinal) &&
-                         expectedNoun.EndsWith("t", StringComparison.Ordinal))
-                {
-                    expectedNoun = expectedNoun[..^1] + "ț";
-                }
-                else if (originalNoun.EndsWith("s", StringComparison.Ordinal) &&
-                         expectedNoun.EndsWith("s", StringComparison.Ordinal))
-                {
-                    expectedNoun = expectedNoun[..^1] + "ș";
-                }
+                inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
+                inputNouns.Add(expectedNoun[..i] + 'a' + expectedNoun[(i + 1)..]);
             }
+            if (c == 'î')
+            {
+                inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
+                inputNouns.Add(expectedNoun[..i] + 'i' + expectedNoun[(i + 1)..]);
+            }
+            if (c == 'ș')
+            {
+                inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
+                inputNouns.Add(expectedNoun[..i] + 's' + expectedNoun[(i + 1)..]);
+            }
+            if (c == 'ț')
+            {
+                inputNouns.Add(expectedNoun[..i] + expectedNoun[i] + expectedNoun[(i + 1)..]);
+                inputNouns.Add(expectedNoun[..i] + 't' + expectedNoun[(i + 1)..]);
+            }
+        }
 
-            Assert.That(result, Is.EqualTo(expectedNoun + suffix));
+        foreach (string originalNoun in inputNouns)
+        {
+            foreach (string suffix in suffixes)
+            {
+                string result = rule.Apply(originalNoun + suffix);
+
+                if (suffix.StartsWith("i", StringComparison.Ordinal))
+                {
+                    if (originalNoun.EndsWith("st", StringComparison.Ordinal) &&
+                        expectedNoun.EndsWith("st", StringComparison.Ordinal))
+                    {
+                        expectedNoun = expectedNoun[..^2] + "șt";
+                    }
+                    else if (originalNoun.EndsWith("t", StringComparison.Ordinal) &&
+                            expectedNoun.EndsWith("t", StringComparison.Ordinal))
+                    {
+                        expectedNoun = expectedNoun[..^1] + "ț";
+                    }
+                    else if (originalNoun.EndsWith("s", StringComparison.Ordinal) &&
+                            expectedNoun.EndsWith("s", StringComparison.Ordinal))
+                    {
+                        expectedNoun = expectedNoun[..^1] + "ș";
+                    }
+                }
+
+                Assert.That(result, Is.EqualTo(expectedNoun + suffix));
+            }
         }
     }
 
     [Test]
+    [TestCase("aparat")]
     [TestCase("comanda")]
     [TestCase("consuma")]
     [TestCase("costa")]

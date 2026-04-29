@@ -213,6 +213,7 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"\bimprumutat\b", "împrumutat", RegexOptions.CultureInvariant);
         result = Regex.Replace(result, @"\bimprumut\b", "împrumut", RegexOptions.CultureInvariant);
         result = Regex.Replace(result, @"\bsusta\b", "șusta", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpusca\b", "pușca", RegexOptions.CultureInvariant);
 
         // Masculine adjective/noun inflections used across i/ii/ilor/ul/ului variants.
         result = Regex.Replace(result, @"\bajutat(i|ii|ilor|ul|ului)\b", "ajutaț$1", RegexOptions.CultureInvariant);
@@ -282,6 +283,20 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"\btaiat\b", "tăiat", RegexOptions.CultureInvariant);
         result = Regex.Replace(result, @"\bintampinat\b", "întâmpinat", RegexOptions.CultureInvariant);
         result = Regex.Replace(result, @"\bintampinat(i|ii|ilor|ul|ului)\b", "întâmpinaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\badusiii\b", "adușiii", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\badusiilor\b", "adușiilor", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\badusiului\b", "adușiului", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bprins\b", "prinși", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdepartat\b", "depărtat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bindepartat\b", "îndepărtat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\badusiul\b", "adușiul", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdepartati\b", "depărtați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bindepartati\b", "îndepărtați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsimtit\b", "simțit", RegexOptions.CultureInvariant);
+
+        result = Regex.Replace(result, @"\bmasurat\b", "măsurat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bnumarat\b", "numărat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bstaret\b", "stareț", RegexOptions.CultureInvariant);
         result = Regex.Replace(result, @"\bvanzator(i|ii|ilor|ul|ului)?\b", "vânzător$1", RegexOptions.CultureInvariant);
 
         return result;
@@ -291,98 +306,211 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
     {
         (string original, string expected)[] roots =
         [
+            ("achizitionat", "achiziționat"),
             ("actualizat", "actualizat"),
+            ("adus", "adus"),
             ("adanc", "adânc"),
+            ("agent", "agent"),
             ("ajutat", "ajutat"),
+            ("aiurist", "aiurist"),
+            ("ales", "ales"),
+            ("alimentat", "alimentat"),
             ("aliniat", "aliniat"),
+            ("alocat", "alocat"),
             ("amanat", "amânat"),
             ("abandonat", "abandonat"),
+            ("aparut", "apărut"),
             ("aprins", "aprins"),
             ("ars", "ars"),
+            ("aruncat", "aruncat"),
             ("ascultat", "ascultat"),
             ("ascultator", "ascultător"),
             ("ascuns", "ascuns"),
+            ("aspirat", "aspirat"),
+            ("astupat", "astupat"),
+            ("atentionat", "atenționat"),
+            ("aurist", "aurist"),
+            ("avocat", "avocat"),
+            ("avertizat", "avertizat"),
             ("avut", "avut"),
+            ("binecuvantat", "binecuvântat"),
             ("bogat", "bogat"),
+            ("bot", "bot"),
+            ("bucatar", "bucătar"),
+            ("calcat", "călcat"),
+            ("caldut", "călduț"),
+            ("capitan", "căpitan"),
             ("castigator", "câștigător"),
+            ("centrist", "centrist"),
             ("cersetor", "cerșetor"),
             ("cires", "cireș"),
+            ("ciupitist", "ciupitist"),
+            ("cules", "cules"),
+            ("comandant", "comandant"),
+            ("comandat", "comandat"),
             ("confirmat", "confirmat"),
             ("comunist", "comunist"),
+            ("construit", "construit"),
+            ("craftat", "craftat"),
             ("crescut", "crescut"),
+            ("crestin", "creștin"),
+            ("credincios", "credincios"),
+            ("curat", "curat"),
+            ("cumparat", "cumpărat"),
+            ("cutitar", "cuțitar"),
             ("cunoscut", "cunoscut"),
+            ("descoperit", "descoperit"),
+            ("depozitat", "depozitat"),
+            ("descarcat", "descărcat"),
+            ("departat", "depărtat"),
             ("delegat", "delegat"),
             ("democrat", "democrat"),
             ("depasit", "depășit"),
             ("dependent", "dependent"),
             ("deschis", "deschis"),
             ("desprins", "desprins"),
+            ("dichisit", "dichisit"),
+            ("diparut", "dispărut"),
+            ("dragut", "drăguț"),
+            ("doborat", "doborât"),
             ("dormit", "dormit"),
             ("dusman", "dușman"),
             ("enorias", "enoriaș"),
             ("estimat", "estimat"),
+            ("expirat", "expirat"),
+            ("excavat", "excavat"),
             ("facut", "făcut"),
             ("fascist", "fascist"),
+            ("familist", "familist"),
             ("ferit", "ferit"),
             ("fiert", "fiert"),
+            ("frant", "frânt"),
             ("functional", "funcțional"),
             ("gasit", "găsit"),
+            ("georgist", "georgist"),
+            ("hranit", "hrănit"),
+            ("iesit", "ieșit"),
+            ("imparat", "împărat"),
             ("imprumutat", "împrumutat"),
+            ("impuscat", "împușcat"),
+            ("imputit", "împuțit"),
             ("incaltat", "încălțat"),
+            ("incalzit", "încălzit"),
+            ("incarcat", "încărcat"),
             ("inchis", "închis"),
             ("inculpat", "inculpat"),
+            ("inghtat", "înghețat"),
+            ("indepartat", "îndepărtat"),
+            ("inspirat", "inspirat"),
+            ("inmultit", "înmulțit"),
             ("intarziat", "întârziat"),
             ("interesat", "interesat"),
+            ("intrat", "intrat"),
             ("intreg", "întreg"),
+            ("jucat", "jucat"),
             ("jucator", "jucător"),
             ("judecator", "judecător"),
+            ("lasat", "lăsat"),
             ("linistit", "liniștit"),
+            ("locotenent", "locotenent"),
             ("lucrator", "lucrător"),
             ("luptator", "luptător"),
             ("mancat", "mâncat"),
+            ("maresal", "mareșal"),
+            ("masurat", "măsurat"),
             ("meserias", "meseriaș"),
+            ("moderat", "moderat"),
+            ("modificat", "modificat"),
+            ("muncit", "muncit"),
+            ("minerit", "minerit"),
             ("mort", "mort"),
+            ("muist", "muist"),
             ("nationalist", "naționalist"),
             ("nazist", "nazist"),
+            ("necredincios", "necredincios"),
+            ("nesimtit", "nesimțit"),
+            ("nihilist", "nihilist"),
+            ("numarat", "numărat"),
+            ("obosit", "obosit"),
+            ("observat", "observat"),
+            ("odihnit", "odihnit"),
+            ("oxidat", "oxidat"),
             ("omorat", "omorât"),
             ("onorat", "onorat"),
             ("operat", "operat"),
             ("pacatos", "păcătos"),
+            ("pilot", "pilot"),
             ("pirat", "pirat"),
+            ("pierdut", "pierdut"),
+            ("perfect", "perfect"),
+            ("prefect", "prefect"),
+            ("plantat", "plantat"),
+            ("pivot", "pivot"),
             ("politist", "polițist"),
             ("postas", "poștaș"),
             ("preferat", "preferat"),
             ("preot", "preot"),
+            ("progresist", "progresist"),
+            ("prins", "prinși"),
             ("prost", "prost"),
+            ("puscat", "pușcat"),
+            ("purist", "purist"),
+            ("raposat", "răposat"),
+            ("apropriat", "apropriat"),
             ("razboinic", "războinic"),
             ("roscat", "roșcat"),
             ("sarac", "sărac"),
             ("sef", "șef"),
+            ("sinucis", "sinucis"),
             ("sobolan", "șobolan"),
+            ("socialist", "socialist"),
+            ("sofer", "șofer"),
+            ("semanat", "semănat"),
+            ("sapat", "săpat"),
+            ("savant", "savant"),
+            ("salvat", "salvat"),
+            ("simtit", "simțit"),
             ("soldat", "soldat"),
+            ("spectaculos", "spectaculos"),
+            ("speriat", "speriat"),
+            ("sorosist", "soroșist"),
+            ("staret", "stareț"),
+            ("tanchist", "tanchist"),
+            ("spanzurat", "spânzurat"),
             ("stins", "stins"),
+            ("surprins", "surprins"),
             ("tamplar", "tâmplar"),
             ("tampit", "tâmpit"),
             ("talhar", "tâlhar"),
             ("terminat", "terminat"),
+            ("trecut", "trecut"),
+            ("trimis", "trimis"),
             ("trantit", "trântit"),
             ("turist", "turist"),
             ("ucis", "ucis"),
+            ("umplut", "umplut"),
             ("urmator", "următor"),
             ("urs", "urs"),
+            ("validat", "validat"),
+            ("vandut", "vândut"),
             ("vames", "vameș"),
+            ("varsat", "vărsat"),
             ("varsator", "vărsător"),
+            ("vazut", "văzut"),
             ("vrut", "vrut"),
             ("vinovat", "vinovat"),
+            ("visator", "visător"),
             ("vizat", "vizat"),
             ("vizitat", "vizitat")
         ];
 
         foreach ((string original, string expected) in roots)
         {
+            string rootPattern = $@"(?:{Regex.Escape(original)}|{BuildRomanianDiacriticAgnosticPattern(expected)})";
+
             text = Regex.Replace(
                 text,
-                $@"\b{original}(i|ii|ilor|ul|ului)?\b",
+                $@"\b{rootPattern}(i|ii|ilor|ul|ului)?\b",
                 m =>
                 {
                     string suffix = m.Groups[1].Value;
@@ -415,6 +543,25 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         }
 
         return text;
+    }
+
+    static string BuildRomanianDiacriticAgnosticPattern(string word)
+    {
+        System.Text.StringBuilder pattern = new(word.Length * 4);
+
+        foreach (char c in word)
+        {
+            _ = c switch
+            {
+                'a' or 'ă' or 'â' => pattern.Append("[aăâ]"),
+                'i' or 'î' => pattern.Append("[iî]"),
+                's' or 'ș' => pattern.Append("[sș]"),
+                't' or 'ț' => pattern.Append("[tț]"),
+                _ => pattern.Append(Regex.Escape(c.ToString()))
+            };
+        }
+
+        return pattern.ToString();
     }
 
     static IReadOnlyList<RegexReplacement> CreateReplacements()
