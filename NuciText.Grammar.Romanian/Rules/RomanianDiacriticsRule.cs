@@ -286,7 +286,7 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"\badusiii\b", "adușiii", RegexOptions.CultureInvariant);
         result = Regex.Replace(result, @"\badusiilor\b", "adușiilor", RegexOptions.CultureInvariant);
         result = Regex.Replace(result, @"\badusiului\b", "adușiului", RegexOptions.CultureInvariant);
-        result = Regex.Replace(result, @"\bprins\b", "prinși", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bprins\b", "prins", RegexOptions.CultureInvariant);
         result = Regex.Replace(result, @"\bdepartat\b", "depărtat", RegexOptions.CultureInvariant);
         result = Regex.Replace(result, @"\bindepartat\b", "îndepărtat", RegexOptions.CultureInvariant);
         result = Regex.Replace(result, @"\badusiul\b", "adușiul", RegexOptions.CultureInvariant);
@@ -451,7 +451,7 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
             ("preferat", "preferat"),
             ("preot", "preot"),
             ("progresist", "progresist"),
-            ("prins", "prinși"),
+            ("prins", "prins"),
             ("prost", "prost"),
             ("puscat", "pușcat"),
             ("purist", "purist"),
