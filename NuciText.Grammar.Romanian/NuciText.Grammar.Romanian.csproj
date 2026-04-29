@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\nucitext.grammar\NuciText.Grammar\NuciText.Grammar.csproj" />
+    <PackageReference Include="NuciText.Grammar" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
