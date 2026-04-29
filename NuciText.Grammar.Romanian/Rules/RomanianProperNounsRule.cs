@@ -10,6 +10,10 @@ internal sealed class RomanianProperNounsRule : PatternReplacementRuleBase
 {
     static readonly IReadOnlyList<RegexReplacement> replacements =
     [
+        new("(?i:batman)", "Batman"),
+        new("(?i:spiderman)", "Spiderman"),
+        new("(?i:marvel)", "Marvel"),
+        new("(?i:de ce comics)", "DC Comics"),
         new("(?i:andrei)", "Andrei"),
         new("(?i:george)", "George"),
         new("(?i:hori)", "Hori"),

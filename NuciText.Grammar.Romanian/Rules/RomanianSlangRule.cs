@@ -14,13 +14,17 @@ internal sealed class RomanianSlangRule : PatternReplacementRuleBase
         new("afair", "din câte îmi aduc aminte"),
         new("cnv", "cineva"),
         new("csf", "ce să faci"),
+        new("dc", "de ce"),
+        new("ft", "foarte"),
         new("idk", "nu știu"),
         new("imd", "imediat"),
         new("mcac", "mă cac"),
         new("mn", "mine"),
         new("nmk[k]*", "nimica"),
+        new("nuj", "nu știu"),
         new("nush", "nu știu"),
         new("pt", "pentru"),
+        new("sal", "salut"),
         new("sall", "salut"),
         new("tre", "trebuie")
     ];
