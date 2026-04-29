@@ -1,9 +1,9 @@
-using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace NuciText.Grammar.Romanian.Rules;
 
 /// <summary>
-/// Replaces "u" endings with "ul" in Romanian text.
+/// Replaces "u" endings with "ul" for Romanian masculine nouns.
 /// </summary>
 internal sealed class UlInsteadOfURule : GrammarRule
 {
@@ -20,17 +20,34 @@ internal sealed class UlInsteadOfURule : GrammarRule
 
         string[] nouns =
         [
-            "aer", "acoperiș", "bloc", "bulevard", "cal", "cap", "castel", "calculator", "cartier",
-            "câștig", "colț", "dragon", "drăguț", "drum", "dubios", "examen", "film", "gând", "geam",
-            "interior", "inventar", "joc", "lac", "lemn", "loc", "mal", "mijloc", "mormânt", "mort",
-            "nivel", "ocean", "om", "oraș", "orășel", "palat", "pod", "porc", "posibil", "prim", "pui",
-            "sat", "sărit", "săpun", "sărut", "seif", "sfat", "stat", "steguleț", "stoc", "târnăcop",
-            "telefon", "top", "tort"
+            "aer", "acoperiș", "alt", "bec", "bloc", "bulevard", "cal", "cap", "castel",
+            "calculator",
+            "cartier", "câștig", "cinci", "client", "cod", "colț", "cont",
+            "dragon", "drăguț", "drum", "dubios", "examen", "film", "format",
+            "fraier", "gând", "geam", "interior", "inventar", "joc", "lac",
+            "lemn", "loc", "mal", "mijloc", "mormânt", "mort", "net", "nivel",
+            "ocean", "om", "opt", "oraș", "orășel", "palat", "plan", "pod",
+            "porc", "posibil", "prim", "pui", "sat", "sărit", "săpun", "sărut",
+            "scop", "seif", "sfânt", "sfat", "singur", "stat", "steguleț", "stoc", "șef",
+            "târnăcop", "telefon", "tip", "top", "topor", "tort", "tot", "trăsnet",
+            "tur", "trei", "vânt", "val", "vârf", "vot", "zid"
         ];
 
         foreach (string noun in nouns)
         {
-            result = result.Replace($"{noun}u", $"{noun}ul");
+            string diacriticlessNoun = noun
+                .Replace("ă", "a")
+                .Replace("â", "a")
+                .Replace("î", "i")
+                .Replace("ș", "s")
+                .Replace("ț", "t")
+                .Replace("Ă", "A")
+                .Replace("Â", "A")
+                .Replace("Î", "I")
+                .Replace("Ș", "S")
+                .Replace("Ț", "T");
+            result = Regex.Replace(result, $@"\b{Regex.Escape(noun)}u\b", $"{noun}ul");
+            result = Regex.Replace(result, $@"\b{Regex.Escape(diacriticlessNoun)}u\b", $"{diacriticlessNoun}ul");
         }
 
         return result;

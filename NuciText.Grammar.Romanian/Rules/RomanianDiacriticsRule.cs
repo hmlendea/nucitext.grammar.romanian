@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using NuciText.Grammar.Rules;
 
 namespace NuciText.Grammar.Romanian.Rules;
@@ -18,231 +19,761 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
 
     /// <inheritdoc/>
     protected override string DoApply(string text)
-        => ApplyWordReplacements(text, replacements);
+    {
+        string result = ApplyWordReplacements(text, replacements);
+
+        if (Regex.IsMatch(text, @"\bbogatii\b", RegexOptions.CultureInvariant))
+        {
+            result = Regex.Replace(result, @"\bbogați\b", "bogații", RegexOptions.CultureInvariant);
+        }
+
+        if (Regex.IsMatch(text, @"\bmuti\b", RegexOptions.CultureInvariant))
+        {
+            result = Regex.Replace(result, @"\bmulți\b", "muți", RegexOptions.CultureInvariant);
+        }
+
+        // Keep ambiguous form unchanged when the source is explicitly "doua".
+        if (Regex.IsMatch(text, @"\bdoua\b", RegexOptions.CultureInvariant))
+        {
+            result = Regex.Replace(result, @"\bdouă\b", "doua", RegexOptions.CultureInvariant);
+        }
+
+        result = Regex.Replace(result, @"\bbarcuta\b", "bărcuța", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bactualizeaza\b", "actualizează", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\breusim\b", "reușim", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\brenuntam\b", "renunțăm", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bapartine\b", "aparține", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcastigam\b", "câștigam", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\baliniaza\b", "aliniază", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\biteratia\b", "iterația", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bscolile\b", "școlile", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvietii\b", "vieții", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bimpartit\b", "împărțit", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\braspunsului\b", "răspunsului", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btarnacop\b", "târnăcop", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bplacere\b", "plăcere", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bplacerea\b", "plăcerea", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpacatosule\b", "păcătosule", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bruleaza\b", "rulează", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\baprinda\b", "aprindă", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bbosii\b", "boșii", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bnumai bogați\b", "numai bogații", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bbogați și\b", "bogații și", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bconcentreaza\b", "concentrează", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcunoastere\b", "cunoaștere", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdefinite\b", "definiție", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdeschisa\b", "deschisă", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdemocratia\b", "democrația", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bnivelata\b", "nivelată", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bodata\b", "odată", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bodinioara\b", "odinioară", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\boua\b", "ouă", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bplanuiesti\b", "plănuiești", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bprimarie\b", "primărie", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\brecunoasca\b", "recunoască", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\broscata\b", "roșcata", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsaraca\b", "săraca", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsaracit\b", "săracit", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsfarseasca\b", "sfârșească", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsparga\b", "spargă", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btaieri\b", "tăieri", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bmuti\b", "muți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\burmator\b", "următor", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bmentin\b", "mențin", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bmentenanta\b", "mentenanța", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bmeserias\b", "meseriaș", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpostas\b", "poștaș", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\binculpati\b", "inculpați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\breductie\b", "reducție", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvoteaza\b", "votează", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvopseasca\b", "vopsească", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bca o\b", "că o", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bca acum\b", "că acum", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsa aprindă\b", "să aprindă", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsa ne-ntoarcem\b", "să ne-ntoarcem", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsa fim\b", "să fim", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsa te\b", "să te", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bstai sa\b", "stai să", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btrebuie sa\b", "trebuie să", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvezi sa nu\b", "vezi să nu", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsa luati\b", "să luați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bca dacă\b", "că dacă", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bnu mai intră acolo\b", "nu mai intra acolo", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @", ca înainte", ", că înainte", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\blibertatii\b", "libertății", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdefileaza\b", "defilează", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bnationale\b", "naționale", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bgarzii\b", "gărzii", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bgradinita\b", "grădinița", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bridicat[aă]\b", "ridicată", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsaptamana\b", "săptămâna", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bspatiu\b", "spațiu", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bestimeaza\b", "estimează", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcaine\b", "câine", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btipam\b", "țipam", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btipai\b", "țipai", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bincepem\b", "începem", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpacate\b", "păcate", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btotii\b", "toții", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btipat\b", "țipat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bfăceeam\b", "făceam", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcirese\b", "cireșe", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcresti\b", "crești", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bveniti\b", "veniți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bincearca\b", "încearcă", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsarat\b", "sărat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bslefuita\b", "șlefuita", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bnoptii\b", "nopții", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\blogheaza\b", "loghează", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bramas\b", "rămas", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bfrisca\b", "frișca", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bscuzati\b", "scuzați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcompleteaza\b", "completează", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bviata\b", "viața", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bviația\b", "viața", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bserupit\b", "șerpuit", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpalmuit\b", "pălmuit", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bfleosc\b", "fleoșc", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcersetor\b", "cerșetor", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bspalat\b", "spălat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bciteasca\b", "citească", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bconfirmati\b", "confirmați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bascunsa\b", "ascunsă", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsarit\b", "sărit", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\brugaciune\b", "rugăciune", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btrantit\b", "trântit", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btotusi\b", "totuși", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bscoasa\b", "scoasă", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdistributie\b", "distribuție", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bteleporteaza\b", "teleportează", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\biuti\b", "iuți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\baprinsi\b", "aprinși", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsarbatoare\b", "sărbătoare", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bfondata\b", "fondată", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdepasit\b", "depășit", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bslefuit\b", "șlefuit", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bnatiune\b", "națiune", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bteava\b", "țeava", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bingrijorare\b", "îngrijorare", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcatel\b", "cățel", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bluati\b", "luați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bimpiedici\b", "împiedici", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsfarsitu\b", "sfârșitul", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btoti\b", "toți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvoiati\b", "voiați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvoiasca\b", "voiască", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvamala\b", "vamală", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvames\b", "vameș", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdusman\b", "dușman", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvinovati\b", "vinovați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bajutati\b", "ajutați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcrescuti\b", "crescuți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvinovatii\b", "vinovații", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\baprinsii\b", "aprinșii", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\blucrator\b", "lucrător", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcires\b", "cireș", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bgasiti\b", "găsiți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdeschisi\b", "deschiși", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdependenti\b", "dependenți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bfacuti\b", "făcuți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bamanat\b", "amânat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdepasiti\b", "depășiți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bmeseriasi\b", "meseriași", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcunoscuti\b", "cunoscuți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\burmatori\b", "următori", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\baliniati\b", "aliniați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bestimati\b", "estimați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\blinistiti\b", "liniștiți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcersetori\b", "cerșetori", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpreferati\b", "preferați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpacatos\b", "păcătos", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdemocratul\b", "democrațul", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bfunctionalul\b", "funcționalul", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\badoarma\b", "adoarmă", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsansa\b", "șansa", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvreti\b", "vreți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bintregi\b", "întregi", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvamesi\b", "vameși", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bferiti\b", "feriți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bbogatul\b", "bogațul", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpolitist\b", "polițist", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpostasi\b", "poștași", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\binchisi\b", "închiși", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\binculpatii\b", "inculpații", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bascunsi\b", "ascunși", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bactualizati\b", "actualizați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsefi\b", "șefi", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\broscat\b", "roșcat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcastigatorul\b", "câștigătorul", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdusmani\b", "dușmani", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btrantiti\b", "trântiți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bconfirmatii\b", "confirmații", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bincaltat\b", "încălțat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bbalanta\b", "balanța", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bimprumutat\b", "împrumutat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bimprumut\b", "împrumut", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsusta\b", "șusta", RegexOptions.CultureInvariant);
+
+        // Masculine adjective/noun inflections used across i/ii/ilor/ul/ului variants.
+        result = Regex.Replace(result, @"\bajutat(i|ii|ilor|ul|ului)\b", "ajutaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcrescut(i|ii|ilor|ul|ului)\b", "crescuț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvinovat(i|ii|ilor|ul|ului)\b", "vinovaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bgasit(i|ii|ilor|ul|ului)\b", "găsiț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdependent(i|ii|ilor|ul|ului)\b", "dependenț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bfacut(i|ii|ilor|ul|ului)\b", "făcuț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bamanat(i|ii|ilor|ul|ului)\b", "amânaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdepasit(i|ii|ilor|ul|ului)\b", "depășiț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpreferat(i|ii|ilor|ul|ului)\b", "preferaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bestimat(i|ii|ilor|ul|ului)\b", "estimaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\baliniat(i|ii|ilor|ul|ului)\b", "aliniaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btrantit(i|ii|ilor|ul|ului)\b", "trântiț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bconfirmat(i|ii|ilor|ul|ului)\b", "confirmaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bactualizat(i|ii|ilor|ul|ului)\b", "actualizaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bferit(i|ii|ilor|ul|ului)\b", "feriț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bbogat(i|ii|ilor|ul|ului)\b", "bogaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdemocrat(i|ii|ilor|ul|ului)\b", "democraț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\binculpat(i|ii|ilor|ul|ului)\b", "inculpaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bincaltat(i|ii|ilor|ul|ului)\b", "încălțaț$1", RegexOptions.CultureInvariant);
+
+        result = Regex.Replace(result, @"\baprins(i|ii|ilor|ul|ului)\b", "aprinș$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcires(i|ii|ilor|ul|ului)\b", "cireș$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdeschis(i|ii|ilor|ul|ului)\b", "deschiș$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bmeserias(i|ii|ilor|ul|ului)\b", "meseriaș$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvames(i|ii|ilor|ul|ului)\b", "vameș$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpostas(i|ii|ilor|ul|ului)\b", "poștaș$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bascuns(i|ii|ilor|ul|ului)\b", "ascunș$1", RegexOptions.CultureInvariant);
+
+        result = Regex.Replace(result, @"\blucrator(i|ii|ilor|ul|ului)?\b", "lucrător$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcastigator(i|ii|ilor|ul|ului)?\b", "câștigător$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpacatos(i|ii|ilor|ul|ului)?\b", "păcătos$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bfunctional(i|ii|ilor|ul|ului)?\b", "funcțional$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bintreg(i|ii|ilor|ul|ului)?\b", "întreg$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bdusman(i|ii|ilor|ul|ului)?\b", "dușman$1", RegexOptions.CultureInvariant);
+
+        result = Regex.Replace(result, @"\bfăceutul\b", "făcuțul", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcunoscutii\b", "cunoscuții", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\burmatorii\b", "următorii", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\blinistitii\b", "liniștiții", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bcersetorii\b", "cerșetorii", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpăcătosi\b", "păcătoși", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpolitisti\b", "polițiști", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\binchisii\b", "închișii", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bsefii\b", "șefii", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\broscati\b", "roșcați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\badanc\b", "adânc", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bstinsi\b", "stinși", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bascultati\b", "ascultați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bfierti\b", "fierți", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bascultator\b", "ascultător", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\barsi\b", "arși", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bonorati\b", "onorați", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bfăceutului\b", "făcuțului", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpăcătosii\b", "păcătoșii", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpolițiștii\b", "polițișții", RegexOptions.CultureInvariant);
+
+        result = ApplyMasculineInflectionCorrections(result);
+        result = Regex.Replace(result, @"\bpăcătosilor\b", "păcătoșilor", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpăcătosul\b", "păcătoșul", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpăcătosului\b", "păcătoșului", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpolițiștii\b", "polițișții", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpolițiștilor\b", "polițișților", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpolițiștul\b", "polițișțul", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bpolițiștului\b", "polițișțului", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\btaiat\b", "tăiat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bintampinat\b", "întâmpinat", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bintampinat(i|ii|ilor|ul|ului)\b", "întâmpinaț$1", RegexOptions.CultureInvariant);
+        result = Regex.Replace(result, @"\bvanzator(i|ii|ilor|ul|ului)?\b", "vânzător$1", RegexOptions.CultureInvariant);
+
+        return result;
+    }
+
+    static string ApplyMasculineInflectionCorrections(string text)
+    {
+        (string original, string expected)[] roots =
+        [
+            ("actualizat", "actualizat"),
+            ("adanc", "adânc"),
+            ("ajutat", "ajutat"),
+            ("aliniat", "aliniat"),
+            ("amanat", "amânat"),
+            ("abandonat", "abandonat"),
+            ("aprins", "aprins"),
+            ("ars", "ars"),
+            ("ascultat", "ascultat"),
+            ("ascultator", "ascultător"),
+            ("ascuns", "ascuns"),
+            ("avut", "avut"),
+            ("bogat", "bogat"),
+            ("castigator", "câștigător"),
+            ("cersetor", "cerșetor"),
+            ("cires", "cireș"),
+            ("confirmat", "confirmat"),
+            ("comunist", "comunist"),
+            ("crescut", "crescut"),
+            ("cunoscut", "cunoscut"),
+            ("delegat", "delegat"),
+            ("democrat", "democrat"),
+            ("depasit", "depășit"),
+            ("dependent", "dependent"),
+            ("deschis", "deschis"),
+            ("desprins", "desprins"),
+            ("dormit", "dormit"),
+            ("dusman", "dușman"),
+            ("enorias", "enoriaș"),
+            ("estimat", "estimat"),
+            ("facut", "făcut"),
+            ("fascist", "fascist"),
+            ("ferit", "ferit"),
+            ("fiert", "fiert"),
+            ("functional", "funcțional"),
+            ("gasit", "găsit"),
+            ("imprumutat", "împrumutat"),
+            ("incaltat", "încălțat"),
+            ("inchis", "închis"),
+            ("inculpat", "inculpat"),
+            ("intarziat", "întârziat"),
+            ("interesat", "interesat"),
+            ("intreg", "întreg"),
+            ("jucator", "jucător"),
+            ("judecator", "judecător"),
+            ("linistit", "liniștit"),
+            ("lucrator", "lucrător"),
+            ("luptator", "luptător"),
+            ("mancat", "mâncat"),
+            ("meserias", "meseriaș"),
+            ("mort", "mort"),
+            ("nationalist", "naționalist"),
+            ("nazist", "nazist"),
+            ("omorat", "omorât"),
+            ("onorat", "onorat"),
+            ("operat", "operat"),
+            ("pacatos", "păcătos"),
+            ("pirat", "pirat"),
+            ("politist", "polițist"),
+            ("postas", "poștaș"),
+            ("preferat", "preferat"),
+            ("preot", "preot"),
+            ("prost", "prost"),
+            ("razboinic", "războinic"),
+            ("roscat", "roșcat"),
+            ("sarac", "sărac"),
+            ("sef", "șef"),
+            ("sobolan", "șobolan"),
+            ("soldat", "soldat"),
+            ("stins", "stins"),
+            ("tamplar", "tâmplar"),
+            ("tampit", "tâmpit"),
+            ("talhar", "tâlhar"),
+            ("terminat", "terminat"),
+            ("trantit", "trântit"),
+            ("turist", "turist"),
+            ("ucis", "ucis"),
+            ("urmator", "următor"),
+            ("urs", "urs"),
+            ("vames", "vameș"),
+            ("varsator", "vărsător"),
+            ("vrut", "vrut"),
+            ("vinovat", "vinovat"),
+            ("vizat", "vizat"),
+            ("vizitat", "vizitat")
+        ];
+
+        foreach ((string original, string expected) in roots)
+        {
+            text = Regex.Replace(
+                text,
+                $@"\b{original}(i|ii|ilor|ul|ului)?\b",
+                m =>
+                {
+                    string suffix = m.Groups[1].Value;
+                    string transformed = expected;
+
+                    if (!string.IsNullOrEmpty(suffix))
+                    {
+                        if (original.EndsWith("st", System.StringComparison.Ordinal) &&
+                            expected.EndsWith("st", System.StringComparison.Ordinal))
+                        {
+                            transformed = suffix == "i"
+                                ? expected[..^2] + "șt"
+                                : expected[..^2] + "șț";
+                        }
+                        else if (original.EndsWith("s", System.StringComparison.Ordinal) &&
+                                 expected.EndsWith("s", System.StringComparison.Ordinal))
+                        {
+                            transformed = expected[..^1] + "ș";
+                        }
+                        else if (original.EndsWith("t", System.StringComparison.Ordinal) &&
+                                 expected.EndsWith("t", System.StringComparison.Ordinal))
+                        {
+                            transformed = expected[..^1] + "ț";
+                        }
+                    }
+
+                    return transformed + suffix;
+                },
+                RegexOptions.CultureInvariant);
+        }
+
+        return text;
+    }
 
     static IReadOnlyList<RegexReplacement> CreateReplacements()
     {
         List<RegexReplacement> values =
         [
-            new("([Aa])[sș](a|chi[ae]|eza(i|m|re|rea|t|te|tele)|tept(a|ai|are|area|at|at[aă]|au)*|tern(e|ut(u[l]*|ului|uri(le|lor)*)*)*)", "$1ș$2"),
-            new("([Aa])t[aâq](rna[a-z][a-z]*|t[a-z]*)", "$1tâ$2"),
-            new("([Cc])[aâ](cat|n(d|tec)|rp(e|it[e]*)|t(e|or))", "$1â$2"),
-            new("([Cc])[aă](dea|lare|r(a|a(re(a)*|t(e)*)|ui(a)*)|zut(e)*)", "$1ă$2"),
-            new("([Gg])[aă](([st]i)(m|t[e]*))", "$1ă$2"),
-            new("([Mm])[aâ](dr(e|ele|elor|i|ie|iei|ii|u|ul|ului)|ec(a|i|ile|ilor)|in(e|i|ile|ilor)|na[a]*|nc(ar(e|ea)|at(e|ele|elor)*)|ni(a|e|ei))", "$1â$2"),
-            new("([Pp])l[aă](cut[e]*|t(esc|it))", "$1lă$2"),
+            new("([Aa](dministra|ltera|pari|utocra|vu)|[Bb]og[aă]|[Cc]o(ntribu|ta)|[Dd](emocra|iscre)|[Ee]mo|[Ll]ega|[Pp](oli|rotec)|[Tt]ranzac)[tț]i(a|e|ei|i|ile|ilor|lor|ona|onat|onate|onatele|onatelor)?", "$1ți$6"),
             new("([Aa](ib|lea[r]*g|rtificial)|[Cc]ad|[Dd]up|[Ll]eag|[Mm]|[Nn]eag|[Pp]leac)[aă]", "$1ă"),
-            new("([Cc]ules|[Mm]ers|[Pp]us)[aă]i", "$1ăi"),
-            new("([Ee]limin|[Ff]um|[Ll]eg|[Pp]rob|[Uu](mbl|r[cm]))[aă]m", "$1ăm"),
-            new("([Ss]eam|[Zz]drav)[aă]n[aă]", "$1ănă"),
-            new("([Bb]l|[Cc]ur|[Gg]|[Mm]erg|[Oo]ric)[aq]nd", "$1ând"),
-            new("([Cc]re|[Dd]ovede|[Ff]ere|[Ll](eneve|uce)|[Mm](inere|unce)|[Oo]pre|[Tt]rebui|[Uu]r|[Vv]orbe)asc[aă]", "$1ască"),
-            new("([Ii]ntr|[Ll](eg|ua)|[Mm]ut|[Pp]lec|[Tt](ermin|r)|[Uu]it)[aq]*[sș]i", "$1ași"),
-            new("([Cc]cules|[Mm]ers)[aăq][sș]i", "$1ăși"),
-            new("([Aa]di|[Dd]a|[Ff](a|ri)|[Jj]oa|[Oo]lea|[Pp]l[e]*a)c[aă]", "$1că"),
-            new("([Cc]hip|[Oo]ach|[Ll]en|[Mm]ol)e[sș](e|ele|elor|i|ii|ilor|im|it|ite)?", "$1eș$2"),
-            new("([Aa]lea[r]*|[Cc]ulea|[Dd]istru)g[aă]", "$1gă"),
-            new("([Cc]cul)e[sș]i", "$1eși"),
-            new("([Cc]it|[Oo]pr|[Pp](orn|rim)|[Vv]en)i[sș]i", "$1iși"),
-            new("([Cc]((e)*a|oboa)|[Oo]moa|[Pp]ia|[Ss](a|ea))r[aă]", "$1ră"),
-            new("([Tt]oa)rc[aă]", "$1rcă"),
-            new("([Tt]oa)rs[aă]", "$1rsă"),
             new("([Aa](lea|pu)|[Cc]ulea|[Dd]u|[Jj]oa|[Pp][au])s[aă]", "$1să"),
-            new("([Aa]linta|[Cc]ealal|[Dd]ezvol|[Ff]ura|[Ii]ntra|[Mm]uta|[Pp]oa|[Rr]oa|[Tt](ermina|oa))t[aă]", "$1tă"),
-            new("([Dd]imine[a]*|[Ff]or|[Nn]ea|[Tt]or|[Vv](erdea|ia|oin))[tț](a|e|ei|ele|elor)", "$1ț$2"),
-            new("([Aa](dministra|ltera|pari|utocra|vu)|[Bb]og[aă]|[Cc]o(ntribu|ta)|[Dd](emocra|iscre)|[Ee]mo|[Ll]ega|[Pp](oli|rotec)|[Tt]ranzac)[tț]i(a|e|ei|i|ile|ilor|lor|ona|onat|onate|onatele|onatelor)?", "$1ți$2"),
-            new("al(a|alalt|ora)", "ăl$1"),
-            new("([Aa])lba[sș]tri(i|lor)*", "$1lbaștri$2"),
+            new("([Aa])[sș] prefera", "$1ș prefera"),
+            new("([Aa])[sș](a|chi[ae]|eza(i|m|re|rea|t|te|tele)|tept(a|ai|are|area|at|at[aă]|au)*|tern(e|ut(u[l]*|ului|uri(le|lor)*)*)*)", "$1ș$2"),
             new("([Aa])l[tț]i(i)*", "$1lți$2"),
+            new("([Aa])lba[sș]tri(i|lor)*", "$1lbaștri$2"),
             new("([Aa])r[ae][tț]i", "$1răți"),
+            new("([Aa])t[aâq](rna[a-z][a-z]*|t[a-z]*)", "$1tâ$2"),
             new("([Aa])ve[tț]i", "$1veți"),
-            new("[aă][sș]tia", "ăștia"),
+            new("([Aa]di|[Dd]a|[Ff](a|ri)|[Jj]oa|[Oo]lea|[Pp]l[e]*a)c[aă]", "$1că"),
+            new("([Aa]lea[r]*|[Cc]ulea|[Dd]istru)g[aă]", "$1gă"),
+            new("([Aa]linta|[Cc]ealal|[Dd]ezvol|[Ff]ura|[Ii]ntra|[Mm]uta|[Pp]oa|[Rr]oa|[Tt](ermina|oa))t[aă]", "$1tă"),
+            new("([Aa]lt[aă]|[Cc]e|[Ff]emei[ae]|[Ff]oarte|[Mm]ai|[Nn]u|[Oo]|[Oo]ai[ae]|[Pp]rima|[Ss][ăe]|[Uu]ltima|[Vv]opsea) (barc|bun|cas|[Dd]at|gr[aă]mad|joac|limb|neagr|poft|singur|treab|v(in)*)[aă][aă]*", "$1 $2ă"),
+            new("([Aa]nu[l]*) asta", "$1 ăsta"),
+            new("([Aa]uzit|[Cc](auza|re(d[e]*[a]*|(i|ut))|um)|[Uu]itat|[Vv]ezi) ca", "$1 că"),
             new("([Bb])[aă]gat(e|ele|elor|u[l]*|ului)?", "$1ăgat$2"),
             new("([Bb])[aă]nu[tț](i|ii|ilor|u[l]*|ului)", "$1ănuț$2"),
-            new("([Bb])[aă]tut(e|ele|elor)?", "$1ătut$2"),
             new("([Bb])[aă]tu[tț](i|ii|ilor)", "$1ătuț$2"),
+            new("([Bb])[aă]tut(e|ele|elor)?", "$1ătut$2"),
             new("([Bb])ine[iî]n[tț]eles", "$1ineînțeles"),
+            new("([Bb])ogatii", "$1ogații"),
             new("([Bb])u[sș]te(an|anu[l]*|anului|ni|nilor)", "$1uște$2"),
-            new("c[aă]c[aă]l[aă]u", "căcălău"),
-            new("c[aă]l[aă]r(ea|eai|esc|im|ind|it|itu[l]*|itului)", "călăr$1"),
-            new("c[aă]l[aă]re[țt](i|ii|ilor)", "călăreț$1"),
-            new("c[aâ]m[aă]tar(i|ii|u[l]*|ului)?", "cămătar$1"),
-            new("c[aă]rti(i|le|lor)*", "cărți$1"),
-            new("c[aâ][sș]tig[aă]to(are|area|arele|arelor|r|ri|rii|rilor)", "câștigăto$1"),
-            new("c[aâ][sș]tig(at|u[l]*|uri|urile|ului)?", "câștig$1"),
-            new("c[aâ][tț]i", "câți"),
+            new("([Bb]l|[Cc]ur|[Gg]|[Mm]erg|[Oo]ric)[aq]nd", "$1ând"),
+            new("([Cc]((e)*a|oboa)|[Oo]moa|[Pp]ia|[Ss](a|ea))r[aă]", "$1ră"),
+            new("([Cc])[aă] (am|imi|îmi)", "$1ă $2"),
+            new("([Cc])[aă] (avem|e|este|îi|merg|nu|o să|oricum|se|sunt(em)*|v[aă]|zice[a]*)", "$1ă $2"),
+            new("([Cc])[aă](dea|lare|r(a|a(re(a)*|t(e)*)|ui(a)*)|zut(e)*)", "$1ă$2"),
+            new("([Cc])[aâ](cat|n(d|tec)|rp(e|it[e]*)|t(e|or))", "$1â$2"),
+            new("([Cc])[aâ]t", "$1ât"),
+            new("([Cc])ealal([a-z]*)", "$1elălal$2"),
             new("([Cc])l[aă]dir(e|ea|i|ii|ile|ilor)", "$1lădir$2"),
             new("([Cc])on(struc|di)ti(a|e|ei|i|ile|ilor)", "$1on$2ți$3"),
             new("([Cc])r[aă]pat", "$1răpat"),
-            new("cre[sș]t(erea|eri|erii|erilor)", "creșt$1"),
-            new("([Cc])[aă] (am|imi|îmi)", "$1ă $2"),
-            new("daca", "dacă"),
-            new("d[aă]deam", "dădeam"),
+            new("([Cc][ae]|[Hh]|[Pp]are|[Vv]re(a|au|i|m|[tț]i)) [sș][aăâq]", "$1 să"),
+            new("([Cc]cul)e[sș]i", "$1eși"),
+            new("([Cc]cules|[Mm]ers)[aăq][sș]i", "$1ăși"),
+            new("([Cc]hip|[Oo]ach|[Ll]en|[Mm]ol)e[sș](e|ele|elor|i|ii|ilor|im|it|ite)?", "$1eș$2"),
+            new("([Cc]it|[Oo]pr|[Pp](orn|rim)|[Vv]en)i[sș]i", "$1iși"),
+            new("([Cc]re|[Dd]ovede|[Ff]ere|[Ll](eneve|uce)|[Mm](inere|unce)|[Oo]pre|[Tt]rebui|[Uu]r|[Vv]orbe)asc[aă]", "$1ască"),
+            new("([Cc]u) [sș][aăâq]", "$1 șa"),
+            new("([Cc]ules|[Mm]ers|[Pp]us)[aă]i", "$1ăi"),
             new("([Dd])[aă]r[aâ]m(e|i|at)?", "$1ărâm$2"),
-            new("dezam[aă]geasc[aă]", "dezamăgească"),
-            new("dezam[aă]g(esc|ire|irea|iri|irii|irilor|itoare|itoarele|itor|itori|itorii)", "dezamăg$1"),
-            new("dezam[aă]ge[sș]t(e|i)", "dezamăgeșt$1"),
-            new("dr[aă]gu[tț](a|e|ele|elor|u[l]*|ului)?", "drăguț$1"),
-            new("e[sș]ti", "ești"),
-            new("face[tț]i", "faceți"),
+            new("([Dd]imine[a]*|[Ff]or|[Nn]ea|[Tt]or|[Vv](erdea|ia|oin))[tț](a|e|ei|ele|elor)", "$1ț$2"),
+            new("([Dd]racu|[Pp]refera) sa", "$1 să"),
+            new("([Ee]limin|[Ff]um|[Ll]eg|[Pp]rob|[Uu](mbl|r[cm]))[aă]m", "$1ăm"),
             new("([Ff])[aă]c(eai|eam|eau|ut|ute|utele|utelor|utu[l]*|utului)", "$1ăce$2"),
             new("([Ff])[aă]cea[tț]i", "$1ăceați"),
-            new("f[aă]cu[sș][h]*i", "făcuși"),
             new("([Ff])[aă]cut(e|ele|elor)?", "$1ăcut$2"),
             new("([Ff])[aă]cut[aă]", "$1ăcută"),
             new("([Ff])erici[tț]i(i|lor)*", "$1ericiți$2"),
             new("([Ff])i[sș]ier(e|ele|elor)?", "$1ișier$2"),
             new("([Ff])unc[tț]i(a|e|ei|i|ile|ona|onal|onale|onalele|onali|onalii|onalilor|onar|onari|onarii|onarilor|onez|onezi)", "$1uncți$2"),
-            new("func[tț]ioneaz[aă]", "funcționează"),
-            new("func[tț]ioneaz[aă],", "funcționează,"),
-            new("g[aă]le[tț]i(i|le|lor)*", "găleți$1"),
-            new("([Gg])[aâ]nd(eam|esc|i|it|itor|u[l]*|uri|urile)?", "$1ând$2"),
-            new("([Gg])[aâ]nde[sș]t(e|i)", "$1ândeșt$2"),
+            new("([Gg])[aă](([st]i)(m|t[e]*))", "$1ă$2"),
             new("([Gg])[aă]s(ea|eai|eam|esc|isem|it|ite)", "$1ăs$2"),
             new("([Gg])[aă]se[sș]t(e|i)", "$1ăseșt$2"),
-            new("([Hh])ot[aă]r[aâ]t(e)?", "$1otărât$2"),
+            new("([Gg])[aâ]nd(eam|esc|i|it|itor|u[l]*|uri|urile)?", "$1ând$2"),
+            new("([Gg])[aâ]nde[sș]t(e|i)", "$1ândeșt$2"),
             new("([Hh])ot[aă]r[aâ][tț]i", "$1otărâți"),
+            new("([Hh])ot[aă]r[aâ]t(e)?", "$1otărât$2"),
             new("([Ii])[e3][sș]i(i|m|nd|re|rea|t|te)", "$1eși$2"),
             new("([Ii])[e3][sș]i[tț]i", "$1eșiți"),
-            new("[iî]mpreun[aă]", "împreună"),
-            new("[iî]n(ainte|alt|alte|apoi|apoiat|chid|chide|chis|chise|dobitocir(e|ea|ii|ilor)|dulci(t|te|rii)|flori(t|te|rii)|treb(are|area|i)*)", "în$1"),
-            new("[iî]n(chinat|chis|(dobito|florea|dul)ceasc)[aă]", "în$1ă"),
-            new("[iî]nc[aă]rcat(e)?", "încărcat$1"),
-            new("[iî]nc(hinat|his)?[aă]", "înc$1ă"),
-            new("[iî]ncerc([a-z]*)", "încerc$1"),
-            new("[iî]ncurca(i|m|t|te|u)", "încurcat$1"),
-            new("[iî]ncurc[aă]tur(a|i|ii|ile|ilor)", "încurcătur$1"),
-            new("[iî]nrob(ire|irea|irii|it|ite)", "înrob$1"),
-            new("[iî]nmul[tț](esc|i|im|ire|irea|ite)", "înmulț$1"),
-            new("[iî]nsf[aâ]r[sș]it", "însfârșit"),
-            new("[iî]nto(arce|arcere|rc|rci|rs)", "înto$1"),
-            new("[iî]ntreba(i|m|re|rea)", "întreba$1"),
-            new("[iî]ntreb[aă](m|ri|rii|rile|rilor|tor|toare|toarea|toarele|tori|torile)?", "întrebă$1"),
-            new("[iî]n[tț]ele(g|ge|gi|pciune|pciunea|pciunii|pt|s|sul|sului|suri|surile)", "înțele$1"),
-            new("[iî]nv[aă]ț(a|ai|am|au|t|te|tu[l]*|tului|tura|turi|turii|turile)", "învăț$1"),
-            new("[iî][sș]i", "își"),
-            new("[iî][tț]i", "îți"),
+            new("([Ii]ntr|[Ll](eg|ua)|[Mm]ut|[Pp]lec|[Tt](ermin|r)|[Uu]it)[aq]*[sș]i", "$1ași"),
             new("([Jj])uc[aă]tor(ii|ilor|i|u[l]*|ului)?", "$1ucător$2"),
-            new("([Ll])[aâ]ng[aă]", "$1ângă"),
             new("([Ll])[aă][tț]i(me|mea|mi|mile|milor|t|te|tele|tu[l]*|tului)?", "$1ăți$2"),
+            new("([Ll])[aâ]ng[aă]", "$1ângă"),
             new("([Ll])e[sș]in(a|ai|at|ate|atelor|atu[l]*|atului|u[l]*|ului)?", "$1eșin$2"),
             new("([Mm])[aă]car", "$1ăcar"),
-            new("([Mm])aimu[tț](a|ei|ele|elor)", "$1aimuț$2"),
             new("([Mm])[aă]n[aâ]nc(e|i)?", "$1ănânc$2"),
             new("([Mm])[aă]n[aâ]nc[aă]", "$1ănâncă"),
-            new("([Mm])[aâ]nc(a|at|ate)?", "$1ânc$2"),
             new("([Mm])[aă]reasc[aă]", "$1ărească"),
-            new("m[aă]resc", "măresc"),
-            new("m[aă]re[sș]t(e|i)", "măreșt$1"),
-            new("mineaz[aă]", "minează"),
+            new("([Mm])[aâ](dr(e|ele|elor|i|ie|iei|ii|u|ul|ului)|ec(a|i|ile|ilor)|in(e|i|ile|ilor)|na[a]*|nc(ar(e|ea)|at(e|ele|elor)*)|ni(a|e|ei))", "$1â$2"),
+            new("([Mm])[aâ]nc(a|at|ate)?", "$1ânc$2"),
+            new("([Mm])aimu[tț](a|ei|ele|elor)", "$1aimuț$2"),
             new("([Mm])onstri(i|ilor)*", "$1onștri$2"),
-            new("min[tț]i(i|le|lor|m|nd|t)*", "minți$1"),
-            new("lini[sș]tit", "liniștit"),
-            new("mi[sș]t(o[o]*|ocar|ocare|ocari|ocarilor)", "mișto$1"),
-            new("mu[l]*[tț](i|umesc|umit|umite)", "mulț$1"),
-            new("ni[sș]te", "niște"),
-            new("omor[aâ]t(e|ele|elor)?", "omorât$1"),
-            new("omor[aâ][tț](i|ii|ilor)", "omorâț$1"),
-            new("ora[sș](e|ele|elor|u[l]*|ului)?", "oraș$1"),
-            new("p[aă]dur(e|ea|i|ii|ile|ilor)", "pădur$1"),
-            new("p[aă]m[aâ]nt(u[l]*|ului|uri|urile|urilor)?", "pământ$1"),
-            new("p[aă]re(a|ai|am|m|re|rea|ri|rii|rile|rilor|rolog|rologi|rologia|rologie|rologii|rologilor)", "păre$1"),
-            new("p[aă]rinte(le|lui|sc)?", "părinte$1"),
-            new("p[aă]rin[tț]i(i|lor)*", "părinți$1"),
-            new("piat[aă]", "piață"),
-            new("pl[aâ]n(g|set|sete|setelor|su[l]*|sului)", "plân$1"),
-            new("pl[aă]te[sș]t(e|i)", "plăteșt$1"),
+            new("([Pp])[aâ]n[aă] (acum|astăzi|atunci|azi|ieri|mâine|săptămâna)", "$1ână $2"),
             new("([Pp])e[sș]ter(a|i|ii|ile|ilor)", "$1eșter$2"),
-            new("por[tț]i(a|e|ei|i|ilor|ona|onat|onate|onezi|une|unea|uni|unile|unilor)?", "porți$1"),
-            new("po[tț]i", "poți"),
-            new("po[tț]i sa", "poți să"),
-            new("po[tț]iun(e|ea|i|ii|ilor)", "poțiun$1"),
-            new("pr[aă]jit(e|uri|urilor)*", "prăjit$1"),
-            new("pr[aă]v[aă]li(a|e|i|ile|ilor)", "prăvăli$1"),
-            new("preg[aă]t(esc|ire|irea|it|ite)", "pregăt$1"),
-            new("pre[sș]edint(a|e|ei|ele|elor|elui)?", "președint$1"),
-            new("pre[tț](u[l]*|uri|urile|urilor)?", "preț$1"),
-            new("func[tț]ional[aă]", "funcțională"),
-            new("puie[tț]i(i|lor)*", "puieț$1"),
-            new("pu[tț]in[aă]", "puțină"),
-            new("pu[tț]in(e|i|ii)", "puțin$1"),
-            new("([Rr])[aă]bdare(a)?", "$1ăbdare$2"),
+            new("([Pp])l[aă](cut[e]*|t(esc|it))", "$1lă$2"),
+            new("([Pp])oft[aă] ([Bb]un[aă])", "$1oftă $2"),
+            new("([Pp]are|[Ss]imt[aăe]*) r[aă]u", "$1 rău"),
             new("([Rr])[aă]bd[aă](m|ri|rii|rile|rilor|toare|toarele|tor|tori|torii)?", "$1ăbdă$2"),
+            new("([Rr])[aă]bdare(a)?", "$1ăbdare$2"),
             new("([Rr])[aă]m[aâ](i|n|n(e(a|a(m|u)*)*)*)", "$1ămâ$2"),
-            new("([Rr])[aă]m[aâ]n[aă]", "$1ămână"),
-            new("r[aă]spun(d|de|zi)", "răspun$1"),
-            new("r[aă]spund[aă]", "răspundă"),
-            new("([Rr])[aă]spunde(a)?[tț]i", "$1ăspunde$2ți"),
             new("([Rr])[aă]m[aâ]n(e|ea|em)?", "$1ămân$2"),
+            new("([Rr])[aă]m[aâ]n[aă]", "$1ămână"),
+            new("([Rr])[aă]spunde(a)?[tț]i", "$1ăspunde$2ți"),
             new("([Rr])[aă]zboi(esc|m|nd|t|u[l]*|ului)", "$1ăzboi$2"),
             new("([Rr])o[sș]i(a|e|ei|i|ile|ilor|t|te|tele|tu[l]*|tului|u|u[l]*|ului)?", "$1oși$2"),
-            new("[sș]andrama(ua)?", "șandrama$1"),
+            new("([Ss])[aă] ([Ff](ac[ăi]*|ie)|[iî][mtț]i|[Vv]ezi)", "$1ă $2"),
             new("([Ss])[aă]pun", "$1ăpun"),
             new("([Ss])[aă]rac(e|ele|elor|i|ii|ilor|u[l]*|ului)?", "$1ărac$2"),
             new("([Ss])[aă]ri[tț]i", "$1ăriți"),
             new("([Ss])[aă]tu(le|lele|li|lii|lilor|rat|rate|ratele)", "$1ătu$2"),
             new("([Ss])[aă]tura[tț]i(i|lor)*", "$1ăturați$2"),
-            new("([Ss])emin[tț]e(le|lor)*", "$1emințe$2"),
             new("([Ss])c[aă]pat(e)?", "$1căpat$2"),
-            new("([Ss])p[aâq]nzurat(e|ei|elor|u[l]*|ului)", "$1pânzurat$2"),
+            new("([Ss])ear[aă] ([Ff]ain[aă])", "$1eară $2"),
+            new("([Ss])emin[tț]e(le|lor)*", "$1emințe$2"),
             new("([Ss])p[aâq]nzura[tț]i(i|ilor)", "$1pânzurați$2"),
+            new("([Ss])p[aâq]nzurat(e|ei|elor|u[l]*|ului)", "$1pânzurat$2"),
             new("([Ss])tegule[tț](e|ele|elor|u[l]*|ului)", "$1steguleț$2"),
+            new("([Ss])tr[aâ]m(b|be|bele|belor|t|te|tele|telor|toare|torii|toilor)", "$1trâm$2"),
+            new("([Ss])tr[aâ]n(g|ge|geri|gerii|gerile|s|se|sele|selor|sori|sorile)", "$1trân$2"),
+            new("([Ss]eam|[Zz]drav)[aă]n[aă]", "$1ănă"),
+            new("([Tt])[aâ]n[aă]ru[l]*(ui)?", "$1ânărul$2"),
+            new("([Tt])[aâ]rzi(e|i|u)", "$1ârzi$2"),
+            new("([Tt])ovar[aă][sș](e|ele|elor|i|ii|ilor)", "$1ovarăș$2"),
+            new("([Tt])r[aă]ie[sș]t(e|i)", "$1răieșt$2"),
+            new("([Tt]oa)rc[aă]", "$1rcă"),
+            new("([Tt]oa)rs[aă]", "$1rsă"),
+            new("([Uu])[sș]or", "$1șor"),
+            new("([Uu])r[aă]sc", "$1răsc"),
+            new("([Uu])r[aâ][tț]i(i|lor)*", "$1râți$2"),
+            new("([Uu])r[aâ]t(e|ei|elor|u[l]*|ului)?", "$1rât$2"),
+            new("([Uu])rca[tț]i(i|lor)*", "$1rcați$2"),
+            new("([Uu])rm[aă]r(ea|eai|esc|im|ind|ire|irea|iri|irii|irilor|it|itoare|itoarei|itoarele|itoarelor|itor|itori|itorilor)", "$1rmăr$2"),
+            new("([Vv])[aă] ([Cc]ulca[tț]i|[Ll]as|[Rr]og|[Ss]upărați)", "$1ă $2"),
+            new("([Vv])[aă](d|dit|dite|zui|zut)", "$1ă$2"),
+            new("([Vv])[aâ]rst(a|e|ei|ele|elor|nic|nice|nicele|nicelor|nicu[l]*|nicului)", "$1ârst$2"),
+            new("([Zz])[aâ]gan(e|esc|i|ic|ii|ilor|u[l]*|ului)?", "$1âgan$2"),
+            new("[aă][sș]tia", "ăștia"),
+            new("[iî][sș]i", "își"),
+            new("[iî][tț]i", "îți"),
+            new("[iî]mpreun[aă]", "împreună"),
+            new("[iî]n(ainte|alt|alte|apoi|apoiat|chid|chide|chis|chise|dobitocir(e|ea|ii|ilor)|dulci(t|te|rii)|flori(t|te|rii)|treb(are|area|i)*)", "în$1"),
+            new("[iî]n(chinat|chis|(dobito|florea|dul)ceasc)[aă]", "în$1ă"),
+            new("[iî]n[tț]ele(g|ge|gi|pciune|pciunea|pciunii|pt|s|sul|sului|suri|surile)", "înțele$1"),
+            new("[iî]nc(hinat|his)?[aă]", "înc$1ă"),
+            new("[iî]nc[aă]rcat(e)?", "încărcat$1"),
+            new("[iî]ncerc([a-z]*)", "încerc$1"),
+            new("[iî]ncurc[aă]tur(a|i|ii|ile|ilor)", "încurcătur$1"),
+            new("[iî]ncurca(i|m|t|te|u)", "încurcat$1"),
+            new("[iî]nmul[tț](esc|i|im|ire|irea|ite)", "înmulț$1"),
+            new("[iî]nrob(ire|irea|irii|it|ite)", "înrob$1"),
+            new("[iî]nsf[aâ]r[sș]it", "însfârșit"),
+            new("[iî]nto(arce|arcere|rc|rci|rs)", "înto$1"),
+            new("[iî]ntreb[aă](m|ri|rii|rile|rilor|tor|toare|toarea|toarele|tori|torile)?", "întrebă$1"),
+            new("[iî]ntreba(i|m|re|rea)", "întreba$1"),
+            new("[iî]nv[aă]ț(a|ai|am|au|t|te|tu[l]*|tului|tura|turi|turii|turile)", "învăț$1"),
+            new("[Pp]ite[sș]ti", "Pitești"),
+            new("[Pp]okemon", "Pokémon"),
+            new("[sș][tț]i(a|u)[tț]i", "ști$1ți"),
+            new("[sș]andrama(ua)?", "șandrama$1"),
             new("[sș]ti(a|ai|am|e|i|im|u|ut|ute)*", "ști$1"),
             new("[sș]tiin[tț](a|e|ei|ele|elor|ific|ifice|ificelor)", "științ$1"),
             new("[sș]tiut[aă]", "știută"),
-            new("([Ss])tr[aâ]m(b|be|bele|belor|t|te|tele|telor|toare|torii|toilor)", "$1trâm$2"),
-            new("([Ss])tr[aâ]n(g|ge|geri|gerii|gerile|s|se|sele|selor|sori|sorile)", "$1trân$2"),
-            new("[sș][tț]i(a|u)[tț]i", "ști$1ți"),
-            new("[tț][aă]rc(u[l]*|ului|uri|urile|urilor)?", "țarc$1"),
             new("[tț][aă]ran(esc|i|ii|ilor|oi|oiu[l]*|oiului|u[l]*|ului)?", "țăran$1"),
-            new("([Tt])[aâ]n[aă]ru[l]*(ui)?", "$1ânărul$2"),
-            new("([Tt])[aâ]rn[aă]cop(u[l]*|ului)?", "$1ârnăcop$2"),
-            new("([Tt])[aâ]rzi(e|i|u)", "$1ârzi$2"),
-            new("([Tt])r[aă]ie[sș]t(e|i)", "$1răieșt$2"),
+            new("[tț][aă]rc(u[l]*|ului|uri|urile|urilor)?", "țarc$1"),
             new("[tț]i[ .-]a(i|m|r)", "ți-a$1"),
             new("[tț]i[ .-]a[sș]", "ți-aș"),
             new("[tț]igan(i|ii|ilor|u[l]*|ului)", "țigan$1"),
-            new("([Tt])ovar[aă][sș](e|ele|elor|i|ii|ilor)", "$1ovarăș$2"),
-            new("([Uu])r[aă]sc", "$1răsc"),
-            new("([Uu])r[aâ]t(e|ei|elor|u[l]*|ului)?", "$1rât$2"),
-            new("([Uu])r[aâ][tț]i(i|lor)*", "$1râți$2"),
-            new("([Uu])rca[tț]i(i|lor)*", "$1rcați$2"),
-            new("([Uu])rm[aă]r(ea|eai|esc|im|ind|ire|irea|iri|irii|irilor|it|itoare|itoarei|itoarele|itoarelor|itor|itori|itorilor)", "$1rmăr$2"),
-            new("([Uu])[sș]or", "$1șor"),
-            new("([Vv])[aă](d|dit|dite|zui|zut)", "$1ă$2"),
-            new("([Vv])[aâ]rst(a|e|ei|ele|elor|nic|nice|nicele|nicelor|nicu[l]*|nicului)", "$1ârst$2"),
-            new("updateaz[aă]", "actualizează"),
-            new("updat(ez|eze|ezi)", "actualiz$1"),
-            new("([Zz])[aâ]gan(e|esc|i|ic|ii|ilor|u[l]*|ului)?", "$1âgan$2"),
-            new("([Aa]lt[aă]|[Cc]e|[Ff]emei[ae]|[Ff]oarte|[Mm]ai|[Nn]u|[Oo]|[Oo]ai[ae]|[Pp]rima|[Ss][ăe]|[Uu]ltima|[Vv]opsea) (barc|bun|cas|[Dd]at|gr[aă]mad|joac|limb|neagr|poft|singur|treab|v(in)*)[aă][aă]*", "$1 $2ă"),
-            new("([Aa]nu[l]*) asta", "$1 ăsta"),
-            new("([Aa]uzit|[Cc](auza|re(d[e]*[a]*|(i|ut))|um)|[Uu]itat|[Vv]ezi) ca", "$1 că"),
-            new("([Aa])[sș] prefera", "$1ș prefera"),
-            new("([Cc][ae]|[Hh]|[Pp]are|[Vv]re(a|au|i|m|[tț]i)) [sș][aăâq]", "$1 să"),
-            new("([Dd]racu|[Pp]refera) sa", "$1 să"),
-            new("([Cc]u) [sș][aăâq]", "$1 șa"),
-            new("([Pp]are|[Ss]imt[aăe]*) r[aă]u", "$1 rău"),
+            new("acolo e resedinta", "acolo e reședința"),
+            new("afara", "afară"),
+            new("al(a|alalt|ora)", "ăl$1"),
+            new("amu", "acum"),
+            new("arata", "arată"),
+            new("asa", "așa"),
+            new("asai", "așa-i"),
             new("b[aă]i (termale)", "băi $1"),
+            new("bn", "bine"),
+            new("bogatii", "bogații"),
+            new("borasc", "borăsc"),
+            new("bosi", "boși"),
+            new("bosilor", "boșilor"),
             new("buna ([sz]iua)", "bună $1"),
-            new("([Cc])[aă] (avem|e|este|îi|merg|nu|o să|oricum|se|sunt(em)*|v[aă]|zice[a]*)", "$1ă $2"),
+            new("bunavointa", "bunăvoința"),
+            new("c[aă]c[aă]l[aă]u", "căcălău"),
+            new("c[aă]l[aă]r(ea|eai|esc|im|ind|it|itu[l]*|itului)", "călăr$1"),
+            new("c[aă]l[aă]re[țt](i|ii|ilor)", "călăreț$1"),
+            new("c[aă]rti(i|le|lor)*", "cărți$1"),
+            new("c[aâ][sș]tig(at|u[l]*|uri|urile|ului)?", "câștig$1"),
+            new("c[aâ][sș]tig[aă]to(are|area|arele|arelor|r|ri|rii|rilor)", "câștigăto$1"),
+            new("c[aâ][tț]i", "câți"),
+            new("c[aâ]m[aă]tar(i|ii|u[l]*|ului)?", "cămătar$1"),
+            new("ca eu", "că eu"),
+            new("ca io", "că eu"),
+            new("ca si", "că și"),
+                new("păcat ca", "păcat că"),
+            new("bine ca", "bine că"),
+            new("baga mare ca", "bagă mare că"),
+            new(", ca eu", ", că eu"),
+            new("ca\\ eu", "că eu"),
+            new("ca\\ si", "că și"),
+            new("probabil o cabana", "probabil o cabană"),
+            new("cand", "când"),
+            new("cateva", "câteva"),
+            new("cladire", "clădire"),
+            new("corecteaza", "corectează"),
+            new("cre[sș]t(erea|eri|erii|erilor)", "creșt$1"),
             new("d[aă] ([aă][sș]t[ei]a)", "dă $1"),
-            new("([Pp])[aâ]n[aă] (acum|astăzi|atunci|azi|ieri|mâine|săptămâna)", "$1ână $2"),
-            new("([Pp])oft[aă] ([Bb]un[aă])", "$1oftă $2"),
-            new("([Ss])[aă] ([Ff](ac[ăi]*|ie)|[iî][mtț]i|[Vv]ezi)", "$1ă $2"),
-            new("([Ss])ear[aă] ([Ff]ain[aă])", "$1eară $2"),
-            new("([Vv])[aă] ([Cc]ulca[tț]i|[Ll]as|[Rr]og|[Ss]upărați)", "$1ă $2"),
-            new("([Cc])[aâ]t", "$1ât"),
-            new("I(i|l|mi|n|s)", "Î$1"),
+            new("d[aă]deam", "dădeam"),
+            new("daca", "dacă"),
+            new("de piatra dasta", "de piatră d-asta"),
+            new("decat", "decât"),
+            new("destept", "deștept"),
+            new("doua", "două"),
+            new("dezam[aă]g(esc|ire|irea|iri|irii|irilor|itoare|itoarele|itor|itori|itorii)", "dezamăg$1"),
+            new("dezam[aă]ge[sș]t(e|i)", "dezamăgeșt$1"),
+            new("dezam[aă]geasc[aă]", "dezamăgească"),
+            new("dr[aă]gu[tț](a|e|ele|elor|u[l]*|ului)?", "drăguț$1"),
+            new("e[sș]ti", "ești"),
+            new("esti", "ești"),
+            new("f[aă]cu[sș][h]*i", "făcuși"),
+            new("face[tț]i", "faceți"),
+            new("facea", "făcea"),
+            new("fereasca", "ferească"),
+            new("foi", "foi"),
+            new("func[tț]ional[aă]", "funcțională"),
+            new("func[tț]ioneaz[aă],", "funcționează,"),
+            new("func[tț]ioneaz[aă]", "funcționează"),
+            new("furnicutele se", "furnicuțele se"),
+            new("g[aă]le[tț]i(i|le|lor)*", "găleți$1"),
+            new("gramada", "grămadă"),
+            new("gramadă", "grămadă"),
             new("i(i|l|mi|n|s)", "î$1"),
-            new("Si", "Și"),
-            new("si", "și"),
-            new("Tie", "Ție"),
-            new("tie", "ție"),
-            new("Tin", "Țin"),
-            new("tin", "țin"),
+            new("I(i|l|mi|n|s)", "Î$1"),
+            new("ii buna", "îi bună"),
+            new("ii lasi", "ii lași"),
+            new("ii", "îi"),
+            new("il voi", "îl voi"),
+            new("imi", "îmi"),
+            new("impotmolit", "împotmolit"),
+            new("intreg", "întreg"),
+            new("intreaga", "întreaga"),
+            new("inainte arata mai bn", "înainte arăta mai bine"),
+            new("mai bine că înainte", "mai bine ca înainte"),
+            new("inainte arata mai", "înainte arăta mai"),
+            new("inainte arata", "înainte arăta"),
+            new("inot", "înot"),
+            new("inseamna", "înseamnă"),
+            new("invitati", "invitați"),
+            new("invitațiilor", "invitațiilor"),
+            new("iti", "îți"),
+            new("înainte arată", "înainte arăta"),
+            new("înseamnă ca", "înseamnă că"),
+            new("jucatoarele", "jucătorarele"),
+            new("jumate", "jumătate"),
+            new("lasa", "lăsa"),
+            new("lasi", "lași"),
+            new("lini[sș]tit", "liniștit"),
+            new("lucrez în gradina", "lucrez în grădină"),
+                new("pentru mina,", "pentru mină,"),
+                new("pentru mina", "pentru mină"),
+            new("m[aă]re[sș]t(e|i)", "măreșt$1"),
+            new("m[aă]resc", "măresc"),
+            new("manca", "mânca"),
+            new("mânca", "mânca"),
+            new("mi[sș]t(o[o]*|ocar|ocare|ocari|ocarilor)", "mișto$1"),
+            new("min[tț]i(i|le|lor|m|nd|t)*", "minți$1"),
+            new("mineaz[aă]", "minează"),
+            new("mu[l]*[tț](i|umesc|umit|umite)", "mulț$1"),
+            new("multa", "multă"),
+            new("nainte", "înainte"),
+            new("ni[sș]te", "niște"),
+            new("noastra", "noastră"),
+            new("noua", "nouă"),
+            new("o nouă resedinta", "o nouă reședință"),
+            new("o noua resedinta", "o nouă reședință"),
             new("o problema", "o problemă"),
-            new("[Pp]ite[sș]ti", "Pitești"),
-            new("[Pp]okemon", "Pokémon")
+            new("omor[aâ][tț](i|ii|ilor)", "omorâț$1"),
+            new("omor[aâ]t(e|ele|elor)?", "omorât$1"),
+            new("ora[sș](e|ele|elor|u[l]*|ului)?", "oraș$1"),
+            new("orasel", "orășel"),
+            new("oraselele", "orășelele"),
+            new("p[aă]dur(e|ea|i|ii|ile|ilor)", "pădur$1"),
+            new("p[aă]m[aâ]nt(u[l]*|ului|uri|urile|urilor)?", "pământ$1"),
+            new("p[aă]re(a|ai|am|m|re|rea|ri|rii|rile|rilor|rolog|rologi|rologia|rologie|rologii|rologilor)", "păre$1"),
+            new("p[aă]rin[tț]i(i|lor)*", "părinți$1"),
+            new("p[aă]rinte(le|lui|sc)?", "părinte$1"),
+            new("pacat", "păcat"),
+            new("pamantean", "pământean"),
+            new("pana", "până"),
+            new("parola nouă", "parolă nouă"),
+            new("jucatoarele", "jucătorarele"),
+            new("parola noua", "parolă nouă"),
+            new("greseasca", "gresească"),
+            new("greselile", "greșelile"),
+            new("hranesc", "hrănesc"),
+            new("inlocuiasca", "înlocuiască"),
+            new("lucratori", "lucrători"),
+            new("odihneasca", "odihnească"),
+            new("piată", "piața"),
+            new("piata", "piața"),
+            new("pl[aă]te[sș]t(e|i)", "plăteșt$1"),
+            new("pl[aâ]n(g|set|sete|setelor|su[l]*|sului)", "plân$1"),
+            new("planuit", "plănuit"),
+            new("po[tț]i sa", "poți să"),
+            new("po[tț]i", "poți"),
+            new("po[tț]iun(e|ea|i|ii|ilor)", "poțiun$1"),
+            new("por[tț]i(a|e|ei|i|ilor|ona|onat|onate|onezi|une|unea|uni|unile|unilor)?", "porți$1"),
+            new("pr[aă]jit(e|uri|urilor)*", "prăjit$1"),
+            new("pr[aă]v[aă]li(a|e|i|ile|ilor)", "prăvăli$1"),
+            new("pre[sș]edint(a|e|ei|ele|elor|elui)?", "președint$1"),
+            new("pre[tț](u[l]*|uri|urile|urilor)?", "preț$1"),
+            new("preg[aă]t(esc|ire|irea|it|ite)", "pregăt$1"),
+            new("pu[tț]in(e|i|ii)", "puțin$1"),
+            new("pu[tț]in[aă]", "puțină"),
+            new("puie[tț]i(i|lor)*", "puieț$1"),
+            new("r[aă]spun(d|de|zi)", "răspun$1"),
+            new("r[aă]spund[aă]", "răspundă"),
+            new("raceala", "răceala"),
+            new("racitura", "răcitură"),
+            new("sambata", "sâmbăta"),
+            new("sarpe", "șarpe"),
+            new("scobeste", "scobește"),
+            new("secatuit", "secătuit"),
+            new("semneaza", "semnează"),
+            new("sentampla", "se întâmplă"),
+            new("sef", "șef"),
+            new("si", "și"),
+            new("Si", "Și"),
+            new("sfinteasca", "sfințească"),
+            new("stanga", "stânga"),
+            new("starneste", "stârnește"),
+            new("stie", "știe"),
+            new("stropeasca", "stropească"),
+            new("strang", "strâng"),
+            new("strangea", "strângea"),
+            new("tau", "tău"),
+            new("temnita", "temnița"),
+            new("temnite", "temnițe"),
+            new("tie", "ție"),
+            new("Tie", "Ție"),
+            new("tin", "țin"),
+            new("Tin", "Țin"),
+            new("munti", "munți"),
+            new("muntii", "munții"),
+                new("o primarie", "o primărie"),
+            new("primarie", "primărie"),
+            new("aparut", "apărut"),
+            new("amanam", "amânam"),
+            new("consideratie", "considerație"),
+                new("dependinta", "dependința"),
+                new("ajuti", "ajuți"),
+                new("voua", "vouă"),
+                new("făceut", "făcut"),
+            new("facut", "făcut"),
+            new("puna", "pună"),
+            new("tranta", "trântă"),
+            new("trânteasca", "trântească"),
+            new("tranteasca", "trântească"),
+            new("trantesc", "trântesc"),
+            new("trota", "trotineta"),
+            new("trotineta", "trotineta"),
+                new("scos trotinetă", "scos trotineta"),
+            new("scos trotinetă afară", "scos trotineta afară"),
+            new("trotinetă noua", "trotinetă nouă"),
+                new("doua temnite", "două temnițe"),
+            new("uita", "uită"),
+            new("updat(ez|eze|ezi)", "actualiz$1"),
+            new("updateaz[aă]", "actualizează"),
+            new("urata", "urâtă"),
+            new("vad", "văd"),
+            new("vine sa", "vine să"),
         ];
 
         return values;

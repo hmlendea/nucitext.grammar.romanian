@@ -6,9 +6,12 @@ namespace NuciText.Grammar.Romanian.UnitTests.Rules;
 [TestFixture]
 public class RomanianSlangRuleTests
 {
+    [TestCase("kk", "bine")]
+    [TestCase("lfl", "la fel")]
+    [TestCase("mcac", "mă cac")]
     [TestCase("nush", "nu știu")]
     [TestCase("pt", "pentru")]
-    [TestCase("kk", "bine")]
+    [TestCase("vsm", "vai și amar")]
     public void Apply_ReplacesCommonSlang(string text, string expected)
     {
         IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianSlangRule");

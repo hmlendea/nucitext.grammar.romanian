@@ -10,6 +10,8 @@ public class RomanianProperNounsRuleTests
     [TestCase("hori", "Hori")]
     [TestCase("ioan", "Ioan")]
     [TestCase("ioana", "Ioana")]
+    [TestCase("romania", "România")]
+    [TestCase("pokemon", "Pokémon")]
     public void Apply_NormalisesProperNouns(string text, string expected)
     {
         IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.RomanianProperNounsRule");
