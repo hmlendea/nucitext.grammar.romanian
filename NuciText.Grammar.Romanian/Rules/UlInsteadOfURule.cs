@@ -129,7 +129,31 @@ namespace NuciText.Grammar.Romanian.Rules
                 "înstrăinat", "însurat", "întemeiat", "întemeietor", "întemnițat", "întins", "întors", "întrebat", "întrepătruns", "întreținut",
                 "întunecat", "întârziat", "înviat", "învins", "învățat", "învățător", "înzăpezit", "înălțat", "înțelept", "șahist",
                 "școlit", "șerpuit", "șlefuit", "șofer", "șpăgar", "ștergător", "șters", "țap", "țarist", "țigan",
-                "țintit", "ținut", "țipat", "țânțar", "țăran", "țărănist",
+                "țintit", "ținut", "țipat", "țânțar", "țăran", "țărănist", "actual", "adaptat", "admin", "administrator",
+                "adoptat", "aliat", "antrenor", "apucat", "asemănat", "asemănător", "candidat", "centrat", "clonat", "colindat",
+                "dezbinat", "doctor", "fermier", "forțat", "frământat", "inadaptat", "infiltrat", "instalat", "înregistrat", "jertfit",
+                "lenevit", "linșat", "lipitor", "lipsit", "lucrat", "medic", "miner", "muncitor", "numerotat", "numit",
+                "parlamentar", "patinat", "plecat", "plictisit", "plictisitor", "pomenit", "pompat", "pompier", "premier", "profesionist",
+                "profesor", "profilat", "programat", "programator", "punctual", "răzbunat", "reactor", "reapucat", "reinstalat", "reîntors",
+                "reprator", "revanșat", "similar", "simplificat", "singular", "specializat", "sportiv", "stricat",
+                "cercetat", "scriitor", "politolog", "protestatar", "umbros", "noros", "ploios", "umbrit", "plouat", "cântărit",
+                "verificat", "ban", "bancher", "baron", "codat", "coordonat", "decolat", "dobândit", "dominat", "dominator",
+                "domn", "domnitor", "dovedit", "gândac", "imun", "imunizat", "înstărit", "jupân", "martor", "ordinar",
+                "ordonat", "oripilat", "oropsit", "ostenit", "ostentativ", "parvenit", "pervers", "pozat", "ucenic", "vaccinat",
+                "vătaf", "vitreg", "voievod", "vulcan", "vulnerabil", "acționat",
+                "calculator", "căscat", "cântat", "cântărit", "cercetat", "diavol", "drac", "încleștat", "înger", "noros",
+                "paznic", "păzitor", "ploios", "plouat", "politolog", "protestatar", "scriitor", "umbrit", "umbros", "verificat",
+                "asasin", "asin", "asistent", "asociat", "asortat", "asumat", "asuprit", "atent", "atipic", "atlet",
+                "atletic", "atmosferic", "atomizat", "atrăgător", "auzit", "avansat", "avantajos", "cârnăcior", "cârnaț", "cartof",
+                "concediat", "disponibil", "disponibilizat", "divers", "diversificat", "diversificator", "identic", "identificat", "înclinat", "istovit",
+                "marginalizat", "mic", "morcov", "neavut", "necesar", "necesitat", "nepermis", "neprimit", "nevoiaș", "nevoit",
+                "nevrut", "postat", "prichindel", "reglementat", "repostat", "revigorant", "revigorat", "ridicol", "ridiculizat", "ridiculos",
+                "sabotat", "sabotor", "scârbit", "scârbos", "slujit", "slujitor", "spumos", "sufletist", "tipărit", "tipizat",
+                "titan", "titanic", "transferat", "treptat", "universal", "universalist", "variat", "viguros", "voit",
+                "alegător", "amiral", "bântuit", "bebeluș", "bifurcat", "catolic", "colos", "dictator", "electrolit", "fascicul",
+                "general", "gigant", "lup", "mânz", "pitic", "piton", "popular", "populist", "rozător", "rudimentar",
+                "rulment", "social-democrat", "strateg", "uriaș", "vultur", "zgâriat", "zgomotos", "zugrav", "zvăpăiat",
+                "zvonit",
             ];
 
             foreach (string noun in nouns)
@@ -148,6 +172,9 @@ namespace NuciText.Grammar.Romanian.Rules
                 result = Regex.Replace(result, $@"\b{Regex.Escape(noun)}u\b", $"{noun}ul");
                 result = Regex.Replace(result, $@"\b{Regex.Escape(diacriticlessNoun)}u\b", $"{diacriticlessNoun}ul");
             }
+
+            // Keep the common fixed expression unchanged.
+            result = Regex.Replace(result, @"\bdracul să ți-o ia\b", "dracu să ți-o ia", RegexOptions.CultureInvariant);
 
             return result;
         }
