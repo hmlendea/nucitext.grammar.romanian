@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using NuciText.Grammar.Romanian.UnitTests.Helpers.Lists;
 using NUnit.Framework;
 
 namespace NuciText.Grammar.Romanian.UnitTests.Rules
@@ -7,6 +9,27 @@ namespace NuciText.Grammar.Romanian.UnitTests.Rules
     [Parallelizable(ParallelScope.All)]
     public class UlInsteadOfURuleTests
     {
+        private static IEnumerable<TestCaseData> MasculineNounVariationTestCases()
+        {
+            foreach (var noun in MasculineNouns.Values)
+            {
+                yield return new TestCaseData($"{noun}u", $"{noun}ul")
+                    .SetName($"{noun}u' -> '{noun}ul'");
+            }
+        }
+
+        [Test, TestCaseSource(nameof(MasculineNounVariationTestCases))]
+        public void GivenMasculineNounEndingWithU_WhenApplyingTheRule_ThenLIsAddedAtTheEnd(
+            string text,
+            string expected)
+        {
+            IGrammarRule rule = CreateRule("NuciText.Grammar.Romanian.Rules.UlInsteadOfURule");
+
+            string result = rule.Apply(text);
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
+
         [TestCase("aeru", "aerul")]
         [TestCase("altu", "altul")]
         [TestCase("becu", "becul")]
