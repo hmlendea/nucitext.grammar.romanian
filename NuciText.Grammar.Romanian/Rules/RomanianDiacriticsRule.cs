@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using NuciText.Grammar.Rules;
 
@@ -121,6 +120,7 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"([Cc])apc", "$1ăpc");
         result = Regex.Replace(result, @"([Cc])lad", "$1lăd");
         result = Regex.Replace(result, @"([Cc])ur[aă][tț]", "$1urăț");
+        result = Regex.Replace(result, @"([Dd])aun", "$1ăun");
         result = Regex.Replace(result, @"([Ff])leosc", "$1leoșc");
         result = Regex.Replace(result, @"([Ff])acut", "$1ăcut");
         result = Regex.Replace(result, @"([Ff])rant", "$1rânt");
@@ -261,6 +261,7 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"pcau", "pcău");
         result = Regex.Replace(result, @"pranc", "prânc");
         result = Regex.Replace(result, @"ptămana", "ptămâna");
+        result = Regex.Replace(result, @"r[aâ]m[aă]to", "râmăto");
         result = Regex.Replace(result, @"radin", "rădin");
         result = Regex.Replace(result, @"ragut", "răguț");
         result = Regex.Replace(result, @"rai([nt])", "răi$1");
