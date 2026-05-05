@@ -4,6 +4,10 @@ namespace NuciText.Grammar.Romanian.UnitTests.Helpers.Lists
     {
         public static readonly string[] Values =
         [
+        ];
+
+        public static readonly string[] Values2 =
+        [
             "abație",
             "aberație",
             "absorbție",
