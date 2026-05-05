@@ -1560,7 +1560,7 @@ namespace NuciText.Grammar.Romanian.UnitTests.Helpers.Lists
             "uscat",
             "userist",
             "ușurat",
-            "ușurăotor",
+            "ușurător",
             "utilat",
             "utilizator",
             "utopist",
