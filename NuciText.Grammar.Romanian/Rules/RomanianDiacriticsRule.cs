@@ -95,6 +95,7 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ss]erif", "șerif");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ss]obo", "șobo");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ss]oca([tț])", "șocat");
+        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ss]ofer", "șofer");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ss]opt", "șopt");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ss]p[aă]g", "șpăg");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ss]ter", "șter");
