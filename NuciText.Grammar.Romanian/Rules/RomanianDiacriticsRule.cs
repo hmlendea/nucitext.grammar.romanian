@@ -270,7 +270,8 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"ecatui", "ecătui");
         result = Regex.Replace(result, @"eg[aă]ti([tț])", "egăti$1");
         result = Regex.Replace(result, @"eg[aă]tor", "egător");
-        result = Regex.Replace(result, @"enti([ou]?)n", "enți$1n");
+        result = Regex.Replace(result, @"enti([ou])n", "enți$1n");
+        result = Regex.Replace(result, @"enti([aein])", "enți$1");
         result = Regex.Replace(result, @"eparta", "epărta");
         result = Regex.Replace(result, @"erset", "erșet");
         result = Regex.Replace(result, @"ertare[tț]", "ertăreț");
@@ -336,6 +337,7 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"raji", "răji");
         result = Regex.Replace(result, @"rambu", "râmbu");
         result = Regex.Replace(result, @"rante", "rânte");
+        result = Regex.Replace(result, @"roset", "roșet");
         result = Regex.Replace(result, @"rapun", "răpun");
         result = Regex.Replace(result, @"razni", "răzni");
         result = Regex.Replace(result, @"rbar", "rbăr");

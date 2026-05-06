@@ -156,6 +156,8 @@ namespace NuciText.Grammar.Romanian.UnitTests.Helpers.Lists
             "intersecție",
             "intonație",
             "intoxicație",
+            "meritocrație",
+            "oligarhie",
             "intuiție",
             "inundație",
             "investigație",
