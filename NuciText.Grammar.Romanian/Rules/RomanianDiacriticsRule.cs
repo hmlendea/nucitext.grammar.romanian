@@ -64,11 +64,12 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
 
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]mpreu", "împreu");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nai", "înai");
-        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]ncepe", "începe");
-        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nc([el])", "înc$1");
-        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]ndo([bi])", "îndo$1");
-        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nfu", "înfu");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]n([gl])", "în$1");
+        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nc([el])", "înc$1");
+        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]ncepe", "începe");
+        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]ndo([bi])", "îndo$1");
+        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]ndru", "îndru$1");
+        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nfu", "înfu");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]not", "înot");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nsea", "însea");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nto([ar])", "înto$1");
