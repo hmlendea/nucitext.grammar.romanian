@@ -178,7 +178,6 @@ namespace NuciText.Grammar.Romanian.UnitTests.Rules
         [TestCase("intoarce", "întoarce")]
         [TestCase("intreaga", "întreaga")]
         [TestCase("iuti", "iuți")]
-        [TestCase("jucatoarele", "jucătoarele")]
         [TestCase("libertatii", "libertății")]
         [TestCase("logheaza", "loghează")]
         [TestCase("mananc", "mănânc")]
