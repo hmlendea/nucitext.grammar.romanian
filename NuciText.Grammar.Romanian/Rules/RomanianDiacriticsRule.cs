@@ -44,6 +44,7 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"\b([Bb])orat", "$1orât");
         result = Regex.Replace(result, @"\b([Cc])[aă]l[aă]([rt])", "$1ălă$2");
         result = Regex.Replace(result, @"\b([Cc])[aâ]in([ei])", "$1âin$2");
+        result = Regex.Replace(result, @"\b([Cc])[aâ]rd[aă][sș]", "$1ârdăș");
         result = Regex.Replace(result, @"\b([Cc])[aâ]te([^l])", "$1âte$2");
         result = Regex.Replace(result, @"\b([Cc])aldu", "$1ăldu");
         result = Regex.Replace(result, @"\b([Cc])arnos", "$1ărnos");
@@ -65,11 +66,12 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nai", "înai");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]ncepe", "începe");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nc([el])", "înc$1");
+        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]ndo([bi])", "îndo$1");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nfu", "înfu");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]n([gl])", "în$1");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]not", "înot");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nsea", "însea");
-        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nto", "înto");
+        result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]nto([ar])", "înto$1");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ii]ntr", "într");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ss]([lt]?)ef", "ș$1ef");
         result = RegexReplaceMatchingFirstLetterCase(result, @"\b[Ss]ah([iu])", "șah$1");
@@ -116,6 +118,7 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"([Cc])[aă]ut([aă])t", "$1ăut$2t");
         result = Regex.Replace(result, @"([Cc])[aâ][sș]tig", "$1âștig");
         result = Regex.Replace(result, @"([Cc])[aâ]nta([nrt])", "$1ânta$2");
+        result = Regex.Replace(result, @"([Cc])[aâ]rmu", "$1ârmu");
         result = Regex.Replace(result, @"([Cc])[aâ]rn[aă]c", "$1ârnăc");
         result = Regex.Replace(result, @"([Cc])apc", "$1ăpc");
         result = Regex.Replace(result, @"([Cc])lad", "$1lăd");
@@ -152,6 +155,7 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"([Ss])[aă]ri([tț])", "$1ări$2");
         result = Regex.Replace(result, @"([Ss])[aâ]c[aâ]i", "$1âcâi");
         result = Regex.Replace(result, @"([Ss])[aâ]mb[aă]t", "$1âmbăt");
+        result = Regex.Replace(result, @"([Ss])[aă]tean", "$1ătean");
         result = Regex.Replace(result, @"([Ss])c[aă]ld", "$1căld");
         result = Regex.Replace(result, @"([Ss])c[aâ]rb", "$1cârb");
         result = Regex.Replace(result, @"([Ss])c[aâ]rp", "$1cărp");
@@ -214,11 +218,12 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"ectio", "ecțio");
         result = Regex.Replace(result, @"eg[aă]ti([tț])", "egăti$1");
         result = Regex.Replace(result, @"eg[aă]tor", "egător");
-        result = Regex.Replace(result, @"entin", "ențin");
+        result = Regex.Replace(result, @"enti([ou]?)n", "enți$1n");
         result = Regex.Replace(result, @"erset", "erșet");
         result = Regex.Replace(result, @"ertare[tț]", "ertăreț");
         result = Regex.Replace(result, @"esnic", "eșnic");
         result = Regex.Replace(result, @"este([dz])", "ește$1");
+        result = Regex.Replace(result, @"([r])esti", "$1ești");
         result = Regex.Replace(result, @"f[aă]c[aă]t", "făcăt");
         result = Regex.Replace(result, @"f[aă]tui", "fătui");
         result = Regex.Replace(result, @"flator", "flător");
@@ -227,6 +232,7 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"icalo", "icălo");
         result = Regex.Replace(result, @"ietui", "iețui");
         result = Regex.Replace(result, @"indato", "indăto");
+        result = Regex.Replace(result, @"inten", "ințen");
         result = Regex.Replace(result, @"inti", "inți");
         result = Regex.Replace(result, @"l([cd])at", "l$1ăt");
         result = Regex.Replace(result, @"l[aă]b[aă]n", "lăbăn");
@@ -272,20 +278,23 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"razni", "răzni");
         result = Regex.Replace(result, @"rbar", "rbăr");
         result = Regex.Replace(result, @"rdaria", "rdăria");
+        result = Regex.Replace(result, @"rtator", "rtător");
+        result = Regex.Replace(result, @"[sș]avi(a|e|il)", "șăvi$1");
+        result = Regex.Replace(result, @"[tț][aă]r[aă]n", "țăran");
+        result = Regex.Replace(result, @"[tț][aâ]nț", "țânț");
+        result = Regex.Replace(result, @"[tț]in[aă]tor", "ținător");
+        result = Regex.Replace(result, @"rese([dl])", "reșe$1");
         result = Regex.Replace(result, @"ret(e|ei|ele|elor|i|ii|ilor|u|ul|ule|ului)?", "reț$1");
-        result = Regex.Replace(result, @"resel", "reșel");
         result = Regex.Replace(result, @"rgator", "rgător");
         result = Regex.Replace(result, @"rmar", "rmăr");
         result = Regex.Replace(result, @"rmas", "rmaș");
         result = Regex.Replace(result, @"rsav", "rșav");
-        result = Regex.Replace(result, @"[tț][aă]r[aă]n", "țăran");
-        result = Regex.Replace(result, @"[tț][aâ]nț", "țânț");
-        result = Regex.Replace(result, @"[tț]in[aă]tor", "ținător");
+        result = Regex.Replace(result, @"știgat([a-z])", "știgăt$1");
         result = Regex.Replace(result, @"t[aă]p[aâ]n", "tăpân");
+        result = Regex.Replace(result, @"t[aă]ri([tț])", "tări$1");
         result = Regex.Replace(result, @"t[aâ]ng", "tâng");
         result = Regex.Replace(result, @"tacio", "tăcio");
         result = Regex.Replace(result, @"tenti", "tenți");
-        result = Regex.Replace(result, @"tigat([a-z])", "tigăt$1");
         result = Regex.Replace(result, @"tramu", "trămu");
         result = Regex.Replace(result, @"trani", "trâni");
         result = Regex.Replace(result, @"tusit", "tușit");
@@ -302,16 +311,19 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         // Endings
         result = Regex.Replace(result, @"([^â][^i])[tț]easc[aă]\b", "$1țească");
         result = Regex.Replace(result, @"([^bcl])ata\b", "$1ața");
-        result = Regex.Replace(result, @"([^cdglmnstv])ar(i|ul|ule|ului)?\b", "$1ăr$2");
+        result = Regex.Replace(result, @"([^cdglmnrstv])ar(i|ul|ule|ului)?\b", "$1ăr$2");
         result = Regex.Replace(result, @"([^iu])tam\b", "$1țam");
         result = Regex.Replace(result, @"([^sș])t(i|ia|ie|iei|ii|iile|iilor|ile|ilor)\b", "$1ț$2");
         result = Regex.Replace(result, @"([A-Za-z])este\b", "$1ește");
         result = Regex.Replace(result, @"([a])ti(i|ile|ilor|u|ul|ului)\b", "$1țiu");
+        result = Regex.Replace(result, @"([aeiou])s(i|ii|iile|iilor|ile|ilor|im|ite|iti|itilor|ti|tii|tilor|tiilor)\b", "$1ș$2");
+        result = Regex.Replace(result, @"([crtv][iu][n])s(i|ii|iile|iilor|ile|ilor|im|ite|iti|itilor|ti|tii|tilor|tiilor)\b", "$1ș$2");
         result = Regex.Replace(result, @"([n])ita\b", "$1ița");
         //result = Regex.Replace(result, @"([ru])[tț]i[tț](u|ul|ule|ului)?\b", "$1țit$2");
 
         result = Regex.Replace(result, @"[tț]e[sș]t([ei])\b", "țeșt$1");
 
+        result = Regex.Replace(result, @"ăs(e|ei|i|ii|ilor|ul|ule|ului)\b", "ăș$1");
         result = Regex.Replace(result, @"[aă]l[aă]tor(i|ii|ilor|ul|ule|ului)?\b", "ălător$1");
         result = Regex.Replace(result, @"ant(a|ei|i|ii|ilor)\b", "anț$1");
         result = Regex.Replace(result, @"aster(e|ea|i|ii)\b", "așter$1");
@@ -325,10 +337,11 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"esti\b", "ești");
         result = Regex.Replace(result, @"fas(i|ii|ilor|u|ul|ule|ului)?\b", "faș$1");
         result = Regex.Replace(result, @"iaza\b", "iază");
-        result = Regex.Replace(result, @"int(a|e|ei|ele|elor|i|ii|ilor)\b", "inț$1");
+        result = Regex.Replace(result, @"inari(a|e|ei|i|ii|ile|ilor)\b", "inări$1");
+        result = Regex.Replace(result, @"int(a|e|ei|ele|elor|i|ii|iile|ilor)\b", "inț$1");
         result = Regex.Replace(result, @"isor(i|ii|ilor|u|ul|ule|ului)?\b", "ișor$1");
         result = Regex.Replace(result, @"iste\b", "iște");
-        result = Regex.Replace(result, @"it(e|ei|ele|elor|i|ii|ilor)\b", "iț$1");
+        result = Regex.Replace(result, @"it(e|ei|ele|elor|i|ii|ile|ilor)\b", "iț$1");
         result = Regex.Replace(result, @"ldut(i|ii|ilor|u|ul|ule|ului)?\b", "lduț$1");
         result = Regex.Replace(result, @"lus(i|ii|ilor|u|ul|ule|ului)?\b", "luș$1");
         result = Regex.Replace(result, @"mu[tț]i[tț](i|ii|ilor)\b", "muțiț$1");
@@ -343,8 +356,8 @@ internal sealed class RomanianDiacriticsRule : PatternReplacementRuleBase
         result = Regex.Replace(result, @"rcut(a|e)\b", "rcuț$1");
         result = Regex.Replace(result, @"ret(i|ii|ilor)?\b", "reț$1");
         result = Regex.Replace(result, @"risca\b", "rișca");
+        result = Regex.Replace(result, @"rs(i|ii|iile|iilor|ile|ilor|im|ite|iti|itilor|ti|tii|tilor|tiilor)\b", "rș$1");
         result = Regex.Replace(result, @"rtine\b", "rține");
-        result = Regex.Replace(result, @"s(i|ii|iile|iilor|ile|ilor|im|ite|iti|itilor|ti|tii|tilor|tiilor)\b", "ș$1");
         result = Regex.Replace(result, @"sca\b", "scă");
         result = Regex.Replace(result, @"tas(i|ii|ilor|u|ul|ule|ului)?\b", "taș$1");
         result = Regex.Replace(result, @"temator(i|ii|ilor|u|ul|ule|ului)?\b", "temător$1");
